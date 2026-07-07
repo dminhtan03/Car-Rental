@@ -1,0 +1,166 @@
+[33md5e9fd9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mViet-4[m[33m, [m[1;31morigin/Viet-4[m[33m)[m 9-4-25 Fix design in edit car detail
+[33md7e498e[m 9-4-25 Fix design in edit car detail
+[33mc2ca91b[m[33m ([m[1;31morigin/Viet-2[m[33m, [m[1;32mViet-2[m[33m)[m new Commit code BookingController
+[33m5f4690a[m Fix change My Profile
+[33m7f6fe44[m Fix change My Profile
+[33me60acad[m Merge remote-tracking branch 'origin/Viet-2' into Viet-2
+[33m018082c[m Fix change My Car list
+[33m29851fa[m security
+[33mf76535f[m Merge remote-tracking branch 'origin/Viet-2' into Viet-2
+[33m07aeb4a[m add code about download document at carDetail page
+[33m32cb937[m Merge remote-tracking branch 'origin/Viet-2' into Viet-2
+[33m77b3234[m fix front-end search car location, add new car
+[33m00b7157[m new forgot-password.html
+[33mb400b3f[m fix front-end home page
+[33m2b37711[m Merge remote-tracking branch 'origin/Viet-2' into Viet-2
+[33m1f4aa83[m fix bug null fields for home and homeForCustomer.html
+[33mee93ba4[m fix bug
+[33mfa9dae6[m Merge remote-tracking branch 'origin/Viet-2' into Viet-2
+[33mfebbcec[m add breadcrumb
+[33mb01a441[m fix swiper for carDetail page
+[33m2509c14[m fix feedback at homepage for guest and customer
+[33m3cf4c06[m Merge remote-tracking branch 'origin/Viet-2' into Viet-2
+[33mf8019bc[m add feedbacks and locations to homeForCustomer
+[33m97e9be1[m fix bug footer
+[33m1209ec0[m fix bug front-end, footer
+[33m759e384[m Merge remote-tracking branch 'origin/Viet-2' into Viet-2
+[33m96329c2[m add locations to homepage
+[33ma57f895[m Merge remote-tracking branch 'origin/Viet-2' into Viet-2
+[33mfe2d2f6[m fix bug front-end
+[33m810e4be[m delete unused js
+[33m67b7798[m add clone avatar for feedback in homepage for guest
+[33m35c4b11[m add feedback in home for guest
+[33m6f7cb78[m authorize page for car owner and customer
+[33mc2d0139[m fix js of edit car detail
+[33m340055d[m big update front-end
+[33m5bf4de1[m Merge remote-tracking branch 'origin/Test3_Huy' into Viet-2
+[33m565b881[m 27-3-25 Update table name
+[33mea9b08f[m 27-3-25 Move to online database
+[33m4ef0646[m commit code about edit car details
+[33mcbafbc9[m commit code about edit car details
+[33m24b09ff[m fix code about edit car detail
+[33md713f78[m fix code about edit car detail
+[33ma89ba2e[m update, fix frond-end
+[33m303264a[m fix code about edit car detail
+[33m93d51ed[m fix code about edit car detail
+[33m0f3a8d0[m fix code about edit car detail
+[33m49b2ee7[m fix code about edit car detail
+[33m4883d17[m 25-3-25 Update frontend
+[33m234e258[m 25-3-25 bug fixes, change file location
+[33mff3142d[m 25-3-25 bug fixes
+[33m2b441e1[m Merge remote-tracking branch 'origin/Viet-2' into Test3_Huy
+[33ma5aaac4[m 25-3-25 update wallet
+[33m78b1522[m fix format number, update payment metod
+[33m87588af[m 24-3-25 bug fixes
+[33m92214bf[m 24-3-25 bug fixes
+[33mcb02883[m fix format number, update payment metod
+[33m6927b6b[m Merge remote-tracking branch 'origin/Viet-2' into Test3_Huy
+[33m5ce9e90[m 22-3-25 bug fixes
+[33m53e8b42[m Update rating star for search car list and fix logic view feedback
+[33m792a8cf[m 22-3-25 bug fixes
+[33md52ebcc[m Update rating Feedback for customer
+[33m479592b[m 21-3-25 edit car detail
+[33mc673142[m 21-3-25 fix booking bugs
+[33mba2ae04[m 20-3-25 add review (car owner), fix booking bugs
+[33m8b5717f[m 20-3-25 update booking, fix bug
+[33mdea12e2[m 20-3-25 update booking, fix bug
+[33m93842f3[m 20-3-25 update booking, fix bug
+[33md4f0991[m Merge remote-tracking branch 'origin/Tan' into Test3_Huy
+[33mbaf6fb2[m[33m ([m[1;32mTan[m[33m)[m Fix new booking list
+[33me707d32[m Fix all
+[33m876272b[m 19-3-25 update booking
+[33meec6433[m 18-3-25 add unit test (wip)
+[33mbef17f8[m 18-3-25 add return car mail, update balance logic
+[33m892fc23[m Update dialog and validate for bookingForm
+[33macc3059[m Merge remote-tracking branch 'origin/Test3_Huy' into Viet-2
+[33m98b837b[m Merge remote-tracking branch 'origin/Test3_Huy' into Tan
+[33mefafa89[m Update back end bookingForm
+[33mb0ef642[m Update front end bookingForm
+[33mde2d8a7[m 17-3-25 bug fix and update
+[33m21d14b4[m Merge remote-tracking branch 'origin/Test3_Huy' into Viet-2
+[33m4712ca6[m Update front end myBookingList
+[33m74ad103[m Update front end myBookingList
+[33m6acb453[m Update front end myBookingList
+[33m5733fd8[m Update front
+[33mc418666[m Fix list booking view
+[33m9249c8b[m 14-3-25 bug fix (booking)
+[33m568dc70[m 14-3-25 front-end update for car detail
+[33m753b31e[m 13-3-25 booking edit
+[33mf2057d2[m Merge remote-tracking branch 'origin/Tan' into Tan
+[33m8e93fb5[m Commit new code
+[33mee3e014[m Merge remote-tracking branch 'origin/Hung' into Tan
+[33ma0dd9ff[m 13-3-25 delete files
+[33m3dcb9cd[m 13-3-25 bug fix
+[33m1e55891[m Merge remote-tracking branch 'origin/Hung' into Hung
+[33m97d5e99[m Booking entity fix
+[33mc82147a[m Fix front end and log out
+[33mcf3ccd0[m Commit new
+[33m9784877[m 12-3-25 bug fix
+[33m97292a5[m 12-3-25 bug fix
+[33m42a9cb5[m 12-3-25 bug fix
+[33m05f1b41[m Merge remote-tracking branch 'origin/Viet' into Test3_Huy
+[33m0c8db31[m Revert "11-3-25 update booking and wallet"
+[33m614cc0c[m 12-3-25 ??
+[33maa2dcf8[m Merge remote-tracking branch 'origin/Ha' into Test3_Huy
+[33m9e28609[m[33m ([m[1;32mHa[m[33m)[m fix bug address
+[33md967bbb[m[33m ([m[1;32mViet[m[33m)[m Merge remote-tracking branch 'origin/Ha' into Viet
+[33m5b585cd[m Update Wallet
+[33mc28579c[m Update Wallet and Transaction
+[33m49ea089[m 11-3-25 update booking and wallet
+[33m1a742a8[m Merge remote-tracking branch 'origin/Test3_Huy' into Viet
+[33m2abf84a[m 11-3-25 update booking and wallet
+[33mc1eb22d[m fix bug address
+[33md27f6ff[m 11-3-25 update booking and wallet
+[33m3302688[m fix bug address
+[33mfab51ee[m Update form rent a car
+[33m3a5e241[m 11-3-25 update booking and wallet
+[33md6895c4[m commit 11/3
+[33mc8872f8[m 11-3-25 update booking and wallet
+[33ma38248b[m 11-3-25 update booking and wallet
+[33m8bf981c[m 10-3-25 update booking
+[33m0166772[m add address fields
+[33m098d66e[m Update rent a car
+[33m35321e2[m 10-3-25 update entity, update booking
+[33m584238e[m add address fields
+[33mdb0895f[m 10-3-25 update entity
+[33m4779024[m 10-3-25 update booking
+[33m94dcd71[m 9-3-25 update booking
+[33m6d5e72a[m Add new editBooking.html and styleForEditCar.css
+[33m0750b55[m Add new editBooking.html and styleForEditCar.css
+[33m3ae1a72[m fix edit car detail readonly fields
+[33m249b213[m Update rent a car
+[33m7e81df9[m 7-3-25 update booking
+[33m7682545[m 7-3-25 update booking
+[33m4d6a695[m Fix front end and log out
+[33m4ab790b[m 7-3-25 update booking
+[33m80a17e8[m fix user entity
+[33m2c206fd[m Add full booking list for customer
+[33m467e331[m Add full booking list for customer
+[33m6a08ebf[m Merge remote-tracking branch 'origin/Hung' into Ha
+[33m7af112b[m commit code about edit car detail fixx
+[33mbe906a4[m commit code about edit car detail fixx
+[33m689d59f[m List car registered
+[33m3786532[m Update rent a car
+[33mcc2bd0b[m 6-3-25 update booking
+[33m3b56cda[m List car registered
+[33m4317b29[m 6-3-25 update booking
+[33m5eff99e[m 6-3-25 update entity
+[33maa110a0[m Add front-end cho trang Rent a car
+[33mff48915[m commit code about edit car detail
+[33m5a6b7a3[m 5-3-25 booking test v1
+[33m375058e[m 5-3-25 booking test v1
+[33m71aef6d[m 5-3-25 booking test v1
+[33m3a111ee[m commit code about edit car detail
+[33m4315744[m fix code about car detail
+[33md2e68f8[m new fix
+[33m8d92a90[m fix code about car detail
+[33m36bfd23[m Merge branch 'Ha' into 'Test'
+[33m15a7ee1[m 4-3-25 update self config
+[33m6a879aa[m Merge remote-tracking branch 'origin/Test' into Tan
+[33m14dccec[m Merge remote-tracking branch 'origin/Test' into Ha
+[33m22ea46b[m new fix
+[33m5754f75[m Merge branch 'Khanh' into 'Test'
+[33m42e2ed1[m Add a car front-end
+[33med3b5c2[m Add a car with ward
+[33m02c1384[m Merge branch 'Khanh' into 'Test'
+[33m4ded7ad[m Merge remote-tracking branch 'origin/Hung' into 

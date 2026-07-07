@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/img/favicon.png}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/all.min.css}">
+
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/select2/css/select2.min.css}">
+
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-datetimepicker.min.css}">
+
+    <!-- Aos CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/aos/aos.css}">
+
+    <!-- Fearther CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/feather.css}">
+
+    <!-- Owl carousel CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+
+    <!-- Boxicons CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/boxicons/css/boxicons.min.css}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header" th:fragment="header">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg header-nav">
+            <div class="navbar-header">
+                <a id="mobile_btn" href="javascript:void(0);">
+                                <span class="bar-icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                </a>
+                <a href="/" class="navbar-brand logo">
+                    <img src="/assets/img/logo.svg" class="img-fluid" alt="Logo">
+                </a>
+                <a href="/" class="navbar-brand logo-small">
+                    <img src="/assets/img/logo-small.png" class="img-fluid" alt="Logo">
+                </a>
+            </div>
+            <div class="main-menu-wrapper">
+                <div class="menu-header">
+                    <a href="/" class="menu-logo">
+                        <img src="/assets/img/logo.svg" class="img-fluid" alt="Logo">
+                    </a>
+                    <a id="menu_close" class="menu-close" href="javascript:void(0);"> <i
+                            class="fas fa-times"></i></a>
+                </div>
+
+                <ul class="main-nav">
+                    <li class="has-submenu" th:if="${role == 'CUSTOMER'}">
+                        <a href="#">Welcome,<span th:text="${fullName}"></span> <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="/myProfile"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                            <li><a th:href="@{/bookings/myBookingList}"><i class="fas fa-car"></i> My Bookings</a>
+                            </li>
+                            <li><a href="/myWallet"><i class="fas fa-wallet"></i> My Wallet</a></li>
+                            <li><a href="/auth/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has-submenu" th:if="${role == 'CAR_OWNER'}">
+                        <a href="#">Welcome,<span th:text="${fullName}"></span> <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="/myProfile"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                            <li><a th:href="@{/cars/myCar}"><i class="fas fa-car"></i> My Cars</a></li>
+                            <li><a href="/myWallet"><i class="fas fa-wallet"></i> My Wallet</a></li>
+                            <li><a href="/reviews"><i class="fas fa-chart-bar"></i> My Reports</a></li>
+                            <li><a href="/auth/logout" ><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<!-- /Header -->
+
+
+<!-- jQuery -->
+<script src="/assets/js/jquery-3.7.1.min.js"></script>
+
+<!-- Bootstrap Core JS -->
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+<!-- counterup JS -->
+<script src="/assets/js/jquery.waypoints.js"></script>
+<script src="/assets/js/jquery.counterup.min.js"></script>
+
+<!-- Select2 JS -->
+<script src="/assets/plugins/select2/js/select2.min.js"></script>
+
+<!-- Aos -->
+<script src="/assets/plugins/aos/aos.js"></script>
+
+<!-- Top JS -->
+<script src="/assets/js/backToTop.js"></script>
+
+<!-- Datepicker Core JS -->
+<script src="/assets/plugins/moment/moment.min.js"></script>
+<script src="/assets/js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- Owl Carousel JS -->
+<script src="/assets/js/owl.carousel.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/assets/js/script.js"></script>
+
+</body>
+</html>

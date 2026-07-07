@@ -1,0 +1,563 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: #333;
+  color: white;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  padding: 50px;
+  background: #444;
+  color: white;
+  justify-content: space-between;
+}
+
+.hero-content {
+  display: flex;
+  width: 100%;
+  align-items: stretch; /* Giữ chiều cao bằng nhau */
+}
+
+.hero-content .left,
+.hero-content .right {
+  width: 50%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Đảm bảo nút luôn ở cùng vị trí */
+}
+
+.hero button {
+  padding: 12px 20px;
+  background: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: auto; /* Đưa nút xuống vị trí thấp nhất có thể */
+}
+.hero p {
+  font-size: 1.1rem; /* Chữ lớn hơn */
+  line-height: 1.6; /* Tăng khoảng cách giữa các dòng */
+  margin-bottom: 15px; /* Giữ khoảng cách giữa các đoạn văn */
+  color: #f1f1f1; /* Màu chữ sáng hơn để dễ đọc */
+  text-align: center;
+}
+.hero h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+/* Why Us Section */
+.why-us {
+  text-align: center;
+  padding: 50px;
+  background: white;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+
+/* Testimonials */
+.testimonials {
+  background: #eee;
+  padding: 30px;
+  text-align: center;
+}
+
+.reviews {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.review {
+  width: 40%;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+}
+
+.review i {
+  font-size: 40px;
+  color: gray;
+  display: block;
+}
+
+/* Locations */
+.locations {
+    padding: 50px;
+    text-align: center;
+}
+
+.location-grid {
+    display: grid; /* Sử dụng grid để tạo bố cục */
+    grid-template-columns: repeat(3, 1fr); /* 3 cột */
+    gap: 40px; /* Tăng khoảng cách giữa các khung */
+}
+
+.location {
+    position: relative; /* Để định vị thẻ span */
+    border-radius: 8px;
+    overflow: hidden; /* Để không hiển thị phần thừa */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px; /* Thêm khoảng cách dưới mỗi khung */
+}
+.locations h2 {
+    margin-bottom: 30px; /* Thêm khoảng cách dưới tiêu đề */
+}
+
+.location img {
+    width: 100%; /* Đặt chiều rộng hình ảnh chiếm toàn bộ khung */
+    height: 100%; /* Đặt chiều cao hình ảnh chiếm toàn bộ khung */
+    object-fit: cover; /* Đảm bảo hình ảnh bao trùm mà không bị biến dạng */
+}
+
+.location span {
+    position: absolute; /* Định vị tuyệt đối */
+    bottom: 10px; /* Cách đáy 10px */
+    left: 10px; /* Cách trái 10px */
+    color: white; /* Màu chữ */
+    background: rgba(0, 0, 0, 0.5); /* Nền bán trong suốt */
+    padding: 5px; /* Khoảng cách bên trong */
+    border-radius: 5px; /* Bo tròn cho nền */
+}
+
+/* Footer */
+.footer {
+  background: #f1f1f1;
+  padding: 20px 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+.footer-sections {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.footer-column {
+  flex: 1;
+  padding: 0 15px;
+}
+
+.footer-column h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin: 5px 0;
+}
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Why Us Section */
+.why-us {
+  text-align: center;
+  padding: 50px;
+  background: white;
+}
+
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.feature {
+    display: block; /* Để thẻ hiển thị như khối */
+    width: 250px; /* Độ rộng của khung */
+    padding: 40px 20px 20px; /* Khoảng cách bên trong, lùi nội dung xuống */
+    text-align: center; /* Căn giữa nội dung */
+    border: 1px solid #ddd; /* Viền khung */
+    border-radius: 10px; /* Bo góc */
+    background: white; /* Màu nền */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+    margin: 15px; /* Khoảng cách giữa các khung */
+    position: relative; /* Để sử dụng vị trí tuyệt đối cho icon */
+}
+
+.feature:hover {
+    transform: scale(1.05); /* Phóng to khi hover */
+}
+
+
+
+.feature i {
+  font-size: 40px;
+  color: blue;
+  margin-bottom: 10px;
+}
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+.header {
+  background: #444;
+  padding: 15px 0;
+  color: white;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+}
+.logo img {
+    height: 45px;
+    margin-right: 10px;
+}
+.container,
+.logo-login,
+.logo {
+  font-size: 30px;
+  margin-left: 9px;
+}
+
+.nav-links-login {
+  font-size: 17px;
+  background: #444;
+  margin-right: -400px;
+}
+.nav-links-login ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 15px; /* Khoảng cách giữa các mục */
+}
+
+.nav-links-login ul li {
+  position: relative;
+}
+
+.nav-links-login ul li:not(:last-child)::after {
+  content: "|";
+  color: #fff; /* Màu của dấu | */
+  margin-left: 10px;
+}
+
+.logo i {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  margin-left: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Login Box */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background: #e0e0e0;
+}
+
+.login-box,
+.signup-box {
+  background: white;
+  padding: 30px;
+  width: 300px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.divider {
+  width: 2px;
+  height: 300px;
+  background: #ccc;
+  margin: 0 30px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.forgot-password {
+  display: block;
+  font-size: 12px;
+  color: #007bff;
+  text-decoration: none;
+  margin-bottom: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: blue;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button i {
+  margin-right: 5px;
+}
+
+/* Sign-up Section */
+.signup-box small {
+  font-size: 12px;
+  color: #666;
+  display: block;
+  margin-top: -8px;
+  margin-bottom: 10px;
+}
+
+.radio-group {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.radio-group input {
+  width: auto;
+  margin-right: 5px;
+}
+
+.terms {
+  font-size: 12px;
+}
+
+.terms a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* Định dạng tổng thể */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background: #e0e0e0;
+  width: 100%;
+}
+
+/* Hai cột bằng nhau */
+.login-box,
+.signup-box {
+  background: white;
+  padding: 30px;
+  width: 50%; /* Chia đôi mỗi bên */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Định dạng chữ */
+h2 {
+  font-size: 25px;
+  margin-bottom: 15px;
+  margin-top: -2px;
+  text-align: left;
+}
+
+/* Ô nhập liệu */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Định dạng nút */
+button {
+  width: 100%;
+  padding: 12px;
+  background: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button i {
+  margin-right: 5px;
+}
+
+/* Dòng chia đôi */
+.divider {
+  width: 2px;
+  height: 100%;
+  background: #ccc;
+}
+
+/* Chỉnh radio và checkbox */
+.radio-group,
+.terms {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.radio-group input,
+.terms input {
+  width: auto;
+  margin-right: 5px;
+}
+
+/* Chỉnh nhỏ text mô tả */
+.signup-box small {
+  font-size: 12px;
+  color: #666;
+  display: block;
+  margin-top: 1px;
+  margin-bottom: 3px;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: space-between; /* Dàn đều 2 radio button */
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px 0;
+}
+
+.radio-group label {
+  margin-left: -7px;
+  font-size: 14px;
+}
+
+.radio-group input {
+  width: auto;
+  margin-right: 10px; /* Tạo khoảng cách giữa nút radio và label */
+}
+
+
+.icon-container {
+    width: 60px; /* Độ rộng của biểu tượng */
+    height: 60px; /* Chiều cao của biểu tượng */
+    position: absolute; /* Đặt vị trí tuyệt đối */
+    top: -30px; /* Đẩy lên trên để nằm đè lên border */
+    left: 50%; /* Căn giữa theo chiều ngang */
+    transform: translateX(-50%); /* Điều chỉnh để căn giữa */
+    overflow: hidden; /* Ẩn phần hình ảnh vượt ra ngoài */
+    border-radius: 50%; /* Bo góc thành hình tròn */
+}
+
+.icon-container img {
+    width: 100%; /* Để hình ảnh chiếm toàn bộ khung */
+    height: auto; /* Tự động điều chỉnh chiều cao */
+    display: block; /* Đảm bảo không có khoảng cách dưới hình ảnh */
+    border-radius: 50%; /* Bo góc hình ảnh thành hình tròn */
+    border: 2px solid #ddd; /* Thêm viền cho hình tròn */
+}
+
+h3, p {
+    margin-top: 20px; /* Lùi các thẻ xuống */
+}
+
+.password-container {
+    position: relative;
+    margin: 10px 0;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 16px; /* Chiều rộng */
+    height: 16px; /* Chiều cao */
+}
+
+.toggle-password i {
+    font-size: 16px; /* Kích thước biểu tượng */
+    width: 100%; /* Chiếm toàn bộ chiều rộng của span */
+    height: 100%; /* Chiếm toàn bộ chiều cao của span */
+    color: black;
+}

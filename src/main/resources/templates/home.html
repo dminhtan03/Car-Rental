@@ -1,0 +1,396 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from dreamsrent.dreamstechnologies.com/html/template/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Mar 2025 09:46:15 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Dreams Rent | Template</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/img/favicon.png}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/all.min.css}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <style>
+        .locations {
+            padding: 50px;
+            text-align: center;
+        }
+
+        .location-grid {
+            display: grid; /* Sử dụng grid để tạo bố cục */
+            grid-template-columns: repeat(3, 1fr); /* 3 cột */
+            gap: 40px; /* Tăng khoảng cách giữa các khung */
+        }
+
+        .location {
+            position: relative; /* Để định vị thẻ span */
+            border-radius: 8px;
+            overflow: hidden; /* Để không hiển thị phần thừa */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px; /* Thêm khoảng cách dưới mỗi khung */
+        }
+        .locations h2 {
+            margin-bottom: 30px; /* Thêm khoảng cách dưới tiêu đề */
+        }
+
+        .location img {
+            width: 100%; /* Đặt chiều rộng hình ảnh chiếm toàn bộ khung */
+            height: 100%; /* Đặt chiều cao hình ảnh chiếm toàn bộ khung */
+            object-fit: cover; /* Đảm bảo hình ảnh bao trùm mà không bị biến dạng */
+        }
+
+        .location span {
+            position: absolute; /* Định vị tuyệt đối */
+            bottom: 10px; /* Cách đáy 10px */
+            left: 10px; /* Cách trái 10px */
+            color: white; /* Màu chữ */
+            background: rgba(0, 0, 0, 0.5); /* Nền bán trong suốt */
+            padding: 5px; /* Khoảng cách bên trong */
+            border-radius: 5px; /* Bo tròn cho nền */
+        }
+        .testimonial-item {
+            min-height: 250px; /* Đặt chiều cao tối thiểu */
+            display: flex;
+            align-items: center;
+        }
+
+        .card {
+            height: 100%; /* Giữ chiều cao cố định */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body {
+            flex: 1; /* Giúp nội dung co giãn đồng đều */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .review-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .list-rating {
+            margin-top: auto; /* Đẩy phần rating xuống dưới cùng */
+        }
+        
+        /* Thêm style cho banner */
+        .banner-content-left {
+            text-align: right;
+            padding-right: 30px;
+        }
+        
+        .banner-content-right {
+            text-align: left;
+            padding-left: 30px;
+        }
+        
+        .banner-divider {
+            position: absolute;
+            top: 5%;
+            bottom: 5%;
+            left: 50%;
+            width: 2px;
+            background: linear-gradient(to bottom right, transparent, #ddd 20%, #666, #ddd 80%, transparent);
+            transform: rotate(15deg);
+            z-index: 1;
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .home-banner {
+            position: relative;
+            padding: 30px 0;
+        }
+        
+        /* Style cho buttons và paragraphs để tương xứng */
+        .home-banner .btn {
+            min-width: 220px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        
+        .banner-content-left p, .banner-content-right p {
+            margin-bottom: 30px;
+            font-size: 16px;
+            display: block;
+            min-height: 50px;
+        }
+        
+        .banner-content-left h1, .banner-content-right h1 {
+            margin-bottom: 25px;
+            min-height: 100px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+
+    <!-- Header -->
+    <header class="header" th:fragment="header">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg header-nav">
+                <div class="navbar-header">
+                    <a id="mobile_btn" href="javascript:void(0);">
+                                <span class="bar-icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                    </a>
+                    <a href="index-5.html" class="navbar-brand logo">
+                        <img src="/assets/img/logo.svg" class="img-fluid" alt="Logo">
+                    </a>
+                    <a href="index-5.html" class="navbar-brand logo-small">
+                        <img src="/assets/img/logo-small.png" class="img-fluid" alt="Logo">
+                    </a>
+                </div>
+
+                <ul class="nav header-navbar-rht">
+                    <li class="nav-item">
+                        <a class="nav-link header-login" href="login.html"><span><i
+                                class="fa-regular fa-user"></i></span>Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link header-reg" href="login.html"><span><i class="fa-solid fa-lock"></i></span>Sign
+                            Up</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- /Header -->
+
+    <!-- Banner -->
+    <section class="banner-section banner-slider">
+        <div class="container">
+            <div class="home-banner">
+                <!-- Đường kẻ chéo ở giữa -->
+                <div class="banner-divider"></div>
+                
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="banner-content-left">
+                            <h1><span>Looking for a vehicle ?</span> <br>
+                                You're at the right place.</h1>
+                            <p>Choose between 100's of private cars for rent at really low prices!</p>
+                            <div class="btn-container">
+                                <a href="/login" class="btn btn-primary mt-3">Find a Rental Car Near You</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="banner-content-right">
+                            <h1><br>Are you a car owner?</h1>
+                            <p>List your car and make money from your asset today!</p>
+                            <div class="btn-container">
+                                <a href="/login" class="btn btn-primary mt-3">List Your Car Today</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Banner -->
+
+    <!-- services -->
+    <section class="section services">
+        <div class="service-right">
+            <img src="/assets/img/bg/service-right.svg" class="img-fluid" alt="services right">
+        </div>
+        <div class="container">
+            <!-- Heading title-->
+            <div class="section-heading">
+                <h2>Why Choose Us ?</h2>
+                <p>We are innovative and passionate about the work we do. </p>
+            </div>
+            <!-- /Heading title -->
+            <div class="services-work">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-12 d-flex">
+                        <div class="services-group service-book flex-fill">
+                            <div class="services-icon border-dark">
+                                <img class="icon-img bg-white" src="/imgHomeGuest/dollar-bill.png" alt="Save Money"/>
+                            </div>
+                            <div class="services-content">
+                                <h3>Save Money</h3>
+                                <p>We have no setup or registration fees. You are only charged when you rent a car. So
+                                    get started for
+                                    FREE!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-12 d-flex">
+                        <div class="services-group service-book flex-fill">
+                            <div class="services-icon border-dark">
+                                <img class="icon-img bg-white" src="/imgHomeGuest/location-pin.png"
+                                     alt="Choose Locations">
+                            </div>
+                            <div class="services-content">
+                                <h3>Convenient</h3>
+                                <p>We have a large selection of privately owned cars to suit your needs throughout the
+                                    country.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-12 d-flex">
+                        <div class="services-group service-book flex-fill">
+                            <div class="services-icon border-dark">
+                                <img class="icon-img bg-white" src="/imgHomeGuest/legal-department.jpg"
+                                     alt="Convenient"/>
+                            </div>
+                            <div class="services-content">
+                                <h3>Legal and Insurance</h3>
+                                <p>We fully cover all rentals and even provide roadside assistance. Our rating system
+                                    ensures
+                                    safety.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-12 d-flex">
+                        <div class="services-group service-book flex-fill">
+                            <div class="services-icon border-dark">
+                                <img class="icon-img bg-white" src="/imgHomeGuest/headphone.png"
+                                     alt="Choose Locations">
+                            </div>
+                            <div class="services-content">
+                                <h3>24/7 Support</h3>
+                                <p>Our team is ready to support you all the way with our 24/7 hotline and services.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /services -->
+
+    <!-- About us Testimonials -->
+    <section class="section about-testimonial testimonials-section">
+        <div class="container">
+            <!-- Heading title-->
+            <div class="section-heading">
+                <h2 class="title text-white">What People Say?</h2>
+                <p class="description text-white">Discover what our customers think about us</p>
+            </div>
+            <!-- /Heading title -->
+
+            <div class="row">
+                <!-- Lặp qua danh sách feedback -->
+                <th:block th:each="feedback, iterStat : ${feedbacks}">
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <!-- Ảnh đại diện -->
+                                    <img src="/assets/img/avatar.jpg" class="rounded-circle me-3" width="60" height="60" alt="User Avatar">
+                                    <div>
+                                        <h6 class="mb-1" th:text="${feedback.user?.fullName ?: 'Unknown User'}">User Name</h6>
+                                        <p class="text-muted" th:text="${feedback.user?.address?.ward?.cityProvince ?: 'Unknown Location'}">User Location</p>
+                                    </div>
+                                </div>
+                                <!-- Nội dung feedback -->
+                                <p class="mt-3" th:text="${feedback.comments ?: 'No feedback available'}">Feedback Content</p>
+                                <!-- Xếp hạng sao -->
+                                <div class="list-rating">
+                                    <th:block th:if="${feedback.rating != null}">
+                                        <th:block th:each="star : ${#numbers.sequence(1, feedback.rating)}">
+                                            <i class="fas fa-star text-warning"></i>
+                                        </th:block>
+                                        <span class="ms-2 text-muted" th:text="'(' + ${feedback.rating} + '.0)'">(5.0)</span>
+                                    </th:block>
+                                    <th:block th:if="${feedback.rating == null}">
+                                        <span class="text-muted">No rating</span>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Địa điểm của chúng tôi -->
+    <section class="locations">
+        <h2>Where to find us?</h2>
+        <div class="location-grid">
+            <div class="location">
+                <img th:src="@{/imgCity/HaNoi.jpg}" alt="Hanoi" />
+                <span>Hanoi</span>
+            </div>
+            <div class="location">
+                <img th:src="@{/imgCity/SaiGon.jpg}" alt="Ho Chi Minh City" />
+                <span>Ho Chi Minh City</span>
+            </div>
+            <div class="location">
+                <img th:src="@{/imgCity/HoiAn.jpg}" alt="Da Nang - Hoi An" />
+                <span>Da Nang - Hoi An</span>
+            </div>
+            <div class="location">
+                <img th:src="@{/imgCity/NhaTrang.jpg}" alt="Nha Trang" />
+                <span>Nha Trang</span>
+            </div>
+            <div class="location">
+                <img th:src="@{/imgCity/DaLat.jpg}" alt="Da Lat" />
+                <span>Da Lat</span>
+            </div>
+            <div class="location">
+                <img th:src="@{/imgCity/QuangNinh.jpg}" alt="Quang Ninh" />
+                <span>Quang Ninh</span>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <div th:insert="~{footer :: footer}"></div>
+    <!-- /Footer -->
+
+
+</div>
+
+<!-- scrollToTop start -->
+<div class="progress-wrap active-progress">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+              style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919px, 307.919px; stroke-dashoffset: 228.265px;"></path>
+    </svg>
+</div>
+<!-- scrollToTop end -->
+
+
+<!-- jQuery -->
+<script src="/assets/js/jquery-3.7.1.min.js"></script>
+
+<!-- Bootstrap Core JS -->
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+<!-- Top JS -->
+<script src="/assets/js/backToTop.js"></script>
+
+<!-- Custom JS -->
+<script src="/assets/js/script.js"></script>
+
+</body>
+
+<!-- Mirrored from dreamsrent.dreamstechnologies.com/html/template/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Mar 2025 09:47:31 GMT -->
+</html>

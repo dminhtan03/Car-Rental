@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Booking</title>
+    <!--  <link rel="stylesheet" th:href="@{/styleForCarBooking.css}">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/styleForCarBooking.css}">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/img/favicon.png}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/all.min.css}">
+
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/select2/css/select2.min.css}">
+
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-datetimepicker.min.css}">
+
+    <!-- Aos CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/aos/aos.css}">
+
+    <!-- Fearther CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/feather.css}">
+
+    <!-- Owl carousel CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+
+    <!-- Boxicons CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/boxicons/css/boxicons.min.css}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        :root {
+           --primary-color: #3498db;
+           --secondary-color: #2ecc71;
+           --danger-color: #e74c3c;
+           --dark-color: #2c3e50;
+           --light-color: #ecf0f1;
+           --text-color: #34495e;
+           --border-radius: 8px;
+           --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+       }
+
+       body {
+           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           background-color: #f9f9f9;
+           color: var(--text-color);
+           line-height: 1.6;
+       }
+
+       .container {
+           max-width: 1200px;
+           margin: 0 auto;
+           padding: 20px;
+       }
+
+       .page-header {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           margin-bottom: 20px;
+       }
+
+       .sort-container {
+           display: flex;
+           align-items: center;
+       }
+
+       .sort-container select {
+           margin-left: 10px;
+           padding: 8px;
+           border-radius: var(--border-radius);
+           border: 1px solid #ddd;
+       }
+
+       .booking-card {
+           background-color: white;
+           border-radius: var(--border-radius);
+           box-shadow: var(--box-shadow);
+           margin-bottom: 25px;
+           overflow: hidden;
+           transition: transform 0.3s ease;
+       }
+
+       .booking-card:hover {
+           transform: translateY(-5px);
+       }
+
+       .booking-header {
+           background-color: var(--dark-color);
+           color: white;
+           padding: 15px 20px;
+           font-weight: bold;
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+       }
+
+       .booking-body {
+           display: flex;
+           padding: 0;
+       }
+
+       .image-container {
+           width: 300px;
+           height: 300px;
+           position: relative;
+           overflow: hidden;
+       }
+
+       .slider {
+           display: flex;
+           transition: transform 0.5s ease-in-out;
+           width: 100%;
+           height: 100%;
+       }
+
+       .slide {
+           min-width: 100%;
+           height: 300px;
+           object-fit: cover;
+       }
+
+       .carousel-btn {
+           position: absolute;
+           top: 50%;
+           transform: translateY(-50%);
+           background: rgba(0, 0, 0, 0.6);
+           color: white;
+           border: none;
+           width: 40px;
+           height: 40px;
+           border-radius: 50%;
+           font-size: 18px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           cursor: pointer;
+           transition: background 0.3s;
+           z-index: 10;
+       }
+
+       .carousel-btn:hover {
+           background: rgba(0, 0, 0, 0.8);
+       }
+
+       .carousel-prev {
+           left: 10px;
+       }
+
+       .carousel-next {
+           right: 10px;
+       }
+
+       .booking-details {
+           flex: 1;
+           padding: 20px;
+           display: flex;
+       }
+
+       .car-info {
+           flex: 2;
+       }
+
+       .car-model {
+           font-size: 24px;
+           font-weight: bold;
+           margin-bottom: 15px;
+           color: var(--dark-color);
+       }
+
+       .booking-dates {
+           margin-bottom: 15px;
+       }
+
+       .booking-dates li {
+           list-style: none;
+           margin-bottom: 8px;
+       }
+
+       .booking-dates i {
+           width: 20px;
+           color: var (--primary-color);
+       }
+
+       .price-info {
+           margin-top: 20px;
+       }
+
+       .price-item {
+           display: flex;
+           justify-content: space-between;
+           margin-bottom: 8px;
+           font-size: 15px;
+       }
+
+       .total-price {
+           font-weight: bold;
+           font-size: 18px;
+           margin-top: 10px;
+           padding-top: 10px;
+           border-top: 1px dashed #ddd;
+       }
+
+       .booking-status {
+           margin-top: 15px;
+           padding: 5px 10px;
+           display: inline-block;
+           border-radius: 4px;
+           font-size: 14px;
+           font-weight: 500;
+       }
+
+       .PENDING_DEPOSIT {
+           background-color: #f39c12;
+           color: white;
+       }
+
+       .CONFIRMED {
+           background-color: #2ecc71;
+           color: white;
+       }
+
+       .IN_PROGRESS {
+           background-color: #3498db;
+           color: white;
+       }
+
+       .COMPLETED {
+           background-color: #27ae60;
+           color: white;
+       }
+
+       .CANCELED {
+           background-color: #e74c3c;
+           color: white;
+       }
+
+       .action-buttons {
+           flex: 1;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           gap: 10px;
+           padding: 0 20px;
+       }
+
+       .btn {
+           padding: 10px 15px;
+           border: none;
+           border-radius: var(--border-radius);
+           cursor: pointer;
+           font-weight: 500;
+           text-align: center;
+           transition: all 0.3s;
+       }
+
+       .btn-primary {
+           background-color: var(--primary-color);
+           color: white;
+       }
+
+       .btn-primary:hover {
+           background-color: #2980b9;
+       }
+
+       .btn-success {
+           background-color: var(--secondary-color);
+           color: white;
+       }
+
+       .btn-success:hover {
+           background-color: #27ae60;
+       }
+
+       .btn-danger {
+           background-color: var(--danger-color);
+           color: white;
+       }
+
+       .btn-danger:hover {
+           background-color: #c0392b;
+       }
+
+       .btn-dark {
+           background-color: var(--dark-color);
+           color: white;
+       }
+
+       .btn-dark:hover {
+           background-color: #1a252f;
+       }
+
+       .booking-id {
+           font-size: 14px;
+           color: #888;
+       }
+
+       .pagination-container {
+           margin-top: 30px;
+           display: flex;
+           justify-content: center;
+       }
+
+       .pagination {
+           display: flex;
+           list-style: none;
+           padding: 0;
+           border-radius: var (--border-radius);
+           overflow: hidden;
+       }
+
+       .pagination-item {
+           margin: 0 5px;
+       }
+
+       .pagination-item a {
+           padding: 8px 15px;
+           background-color: white;
+           color: var(--primary-color);
+           border: 1px solid #ddd;
+           border-radius: var(--border-radius);
+           text-decoration: none;
+           display: block;
+           transition: all 0.3s;
+       }
+
+       .pagination-item a:hover {
+           background-color: var(--primary-color);
+           color: white;
+       }
+
+       .pagination-item.active a {
+           background-color: var(--primary-color);
+           color: white;
+           border-color: var (--primary-color);
+       }
+
+       .pagination-item.disabled a {
+           color: #ccc;
+           background-color: #f9f9f9;
+           cursor: not-allowed;
+       }
+
+       .no-data-message {
+           text-align: center;
+           padding: 50px;
+           background-color: white;
+           border-radius: var(--border-radius);
+           box-shadow: var(--box-shadow);
+       }
+
+       /* Modal styles */
+       .modal-content {
+           border-radius: var(--border-radius);
+           box-shadow: var(--box-shadow);
+       }
+
+       .modal-header {
+           background-color: var(--primary-color);
+           color: white;
+           border-bottom: none;
+           border-top-left-radius: var(--border-radius);
+           border-top-right-radius: var(--border-radius);
+       }
+
+       .modal-footer {
+           border-top: none;
+       }
+
+       /* Rating styles */
+       .star_rating {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           margin-bottom: 20px;
+       }
+
+       .star_rating button {
+           background: transparent;
+           border: none;
+           font-size: 30px;
+           color: #f39c12;
+           cursor: pointer;
+           transition: transform 0.2s;
+       }
+
+       .star_rating button:hover {
+           transform: scale(1.2);
+       }
+
+       .rating-form input[type="text"] {
+           width: 100%;
+           padding: 10px;
+           margin-top: 5px;
+           border: 1px solid #ddd;
+           border-radius: var(--border-radius);
+       }
+
+       /* Debug section - hidden by default */
+       .debug-section {
+           display: none;
+           margin-top: 15px;
+           padding: 10px;
+           background-color: #f8f9fa;
+           border: 1px solid #ddd;
+           border-radius: var(--border-radius);
+           font-size: 12px;
+       }
+
+       .show-debug {
+           font-size: 12px;
+           color: #888;
+           cursor: pointer;
+           text-decoration: underline;
+           margin-top: 5px;
+       }
+
+       /* Enhanced Rating Modal */
+       .star_rating {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           margin-bottom: 20px;
+       }
+
+       .star_rating div {
+           display: flex;
+           gap: 5px;
+       }
+
+       .star_rating button {
+           background: transparent;
+           border: none;
+           font-size: 40px;
+           color: #f39c12;
+           cursor: pointer;
+           transition: transform 0.2s, color 0.2s;
+           padding: 0 5px;
+       }
+
+       .star_rating button:hover {
+           transform: scale(1.2);
+           color: #ff9800;
+       }
+
+       .current_rating {
+           margin-top: 10px;
+           font-weight: bold;
+           font-size: 16px;
+       }
+
+       .rating-form .form-group {
+           margin-top: 20px;
+       }
+
+       .rating-success-message {
+           text-align: center;
+           font-size: 18px;
+           margin: 20px 0;
+           color: var(--secondary-color);
+       }
+        >
+    .form-label {
+        font-weight: 600;
+    }
+
+    .container-fluid {
+        margin-bottom: 30px;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .row > div {
+        flex: 1 1 45%;
+    }
+
+    .form-control,
+    .form-select {
+        border-radius: 8px;
+        box-shadow: none;
+        padding: 8px 12px;
+    }
+
+    .upload-btn {
+        display: inline-block;
+        margin-top: 8px;
+        background-color: #007bff;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .upload-btn:hover {
+        background-color: #0056b3;
+    }
+
+    h4 {
+        margin-bottom: 16px;
+        font-weight: bold;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-top: 16px;
+        gap: 8px;
+        font-weight: 500;
+    }
+
+    button[type="submit"] {
+        margin-top: 24px;
+        padding: 10px 24px;
+        font-weight: 600;
+        border-radius: 8px;
+        border: none;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #218838;
+    }
+
+    select,
+    input[type="text"],
+    input[type="date"],
+    input[type="file"] {
+        width: 100%;
+    }
+    </style>
+</head>
+<body>
+<div th:insert="~{header :: header}"></div>
+<ul class="breadcrumb">
+    <li><a href="/">Home</a> /</li>
+    <li>Edit Booking Detail</li>
+</ul>
+<h2>Booking Details</h2>
+<div id="booking-list" class="container">
+
+        <div class="booking-card">
+            <div class="booking-header" style="color: black;">
+                <span th:text="${booking.car.brand.name + ' ' + booking.car.model.name}"></span>
+                <span class="booking-id">Booking No.: <span th:text="${booking.bookingNumber}"></span></span>
+            </div>
+
+            <div class="booking-body">
+                <!-- Image Carousel -->
+                <div class="image-container">
+                    <div class="slider">
+                        <img th:each="img : ${booking.car.images}" th:src="@{/images/{imageId}(imageId=${img.imageId})}"
+                             alt="Car Image" class="slide">
+                    </div>
+                </div>
+
+                <!-- Booking Details -->
+                <div class="booking-details">
+                    <div class="car-info">
+                        <ul class="booking-dates">
+                            <li>
+                                <i class="fas fa-calendar-alt"></i>
+                                From: <span
+                                    th:text="${#temporals.format(booking.startDate, 'dd/MM/yyyy - hh:mm a', T(java.util.Locale).ENGLISH)}"></span>
+                            </li>
+                            <li>
+                                <i class="fas fa-calendar-check"></i>
+                                To: <span
+                                    th:text="${#temporals.format(booking.endDate, 'dd/MM/yyyy - hh:mm a', T(java.util.Locale).ENGLISH)}"></span>
+                            </li>
+                        </ul>
+
+                        <div class="price-info">
+                            <div class="price-item">
+                                <span>Base price:</span>
+                                <span th:text="${#numbers.formatDecimal(booking.car.pricePerDay, 0, 'COMMA', 0, 'NONE') + ' VND'}"></span>
+                            </div>
+                            <div class="price-item">
+                                <span>Deposit:</span>
+                                <span th:text="${#numbers.formatDecimal(booking.car.deposit, 0, 'COMMA', 0, 'NONE') + ' VND'}"></span>
+                            </div>
+                            <div class="price-item total-price">
+                                <span>Total:</span>
+                                <span th:text="${totalPrices != null and totalPrices[iterStat.index] != null ?
+                                        #numbers.formatDecimal(totalPrices[iterStat.index], 0, 'COMMA', 0, 'POINT') :
+                                        #numbers.formatDecimal(booking.totalCost, 0, 'COMMA', 0, 'NONE')} + ' VND'">
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <strong>Status: </strong>
+                            <span class="booking-status" th:classappend="${booking.status}"
+                                  th:text="${booking.status}"></span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <!-- View Details -->
+                        <button class="btn btn-primary" onclick="viewDetails(this)" th:data-id="${booking.bookingId}">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
+
+                        <!-- Confirm Pickup -->
+                        <form th:action="@{/bookings/confirmPickup}" method="post"
+                              th:if="${booking.status.name() == 'CONFIRMED'}">
+                            <input type="hidden" name="bookingId" th:value="${booking.bookingId}"/>
+                            <button type="submit" class="btn btn-dark">
+                                <i class="fas fa-check-circle"></i> Confirm Pick-up
+                            </button>
+                        </form>
+
+                        <!-- Cancel Booking -->
+                        <form th:action="@{/bookings/cancel}" method="post"
+                              th:if="${booking.status.name() == 'CONFIRMED' || booking.status.name() == 'PENDING_DEPOSIT'}">
+                            <input type="hidden" name="bookingId" th:value="${booking.bookingId}"/>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-times-circle"></i> Cancel Booking
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <h3>Edit Booking</h3>
+<div class="unified-frame">
+    <th:block th:with="isDisabled=${#lists.contains({'IN_PROGRESS','PENDING_PAYMENT','COMPLETED','CANCELLED'}, booking.status.name())}">
+    <form th:action="@{/bookings/update}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="bookingId" th:value="${booking.bookingId}"/>
+        <div class="container-fluid">
+            <h4>Renter Information</h4>
+            <div class="row">
+                <!-- Cột 1 -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" name="renterFullName" th:value="${renter.fullName}"
+                               th:disabled="${isDisabled}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="text" class="form-control" name="renterPhone" th:value="${renter.phoneNumber}"
+                               th:disabled="${isDisabled}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">National ID</label>
+                        <input type="text" class="form-control" name="renterNationalId" th:value="${renter.nationalId}"
+                               th:disabled="${isDisabled}" required>
+                    </div>
+                </div>
+
+                <!-- Cột 2 -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" name="renterDob" th:value="${renter.dateOfBirth}"
+                               th:disabled="${isDisabled}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-control" name="renterEmail" th:value="${renter.user.email}" th:disabled="${isDisabled}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Driving License (optional)</label>
+                        <input type="file" id="renterLicense" name="renterLicense" accept="image/*,application/pdf"
+                               th:disabled="${isDisabled}" class="form-control">
+                        <label for="renterLicense" class="upload-btn">Upload</label>
+                    </div>
+                </div>
+            </div>
+
+            <h4>Renter Address</h4>
+            <div class="row">
+                <div>
+                    <label class="form-label">City</label>
+                    <select id="renterCity" name="renterCity" class="form-select" th:disabled="${isDisabled}">
+                        <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">District</label>
+                    <select id="renterDistrict" name="renterDistrict" class="form-select" th:disabled="${isDisabled}">
+                        <option th:value="${renter.address?.ward?.district}"
+                                th:text="${renter.address?.ward?.district}"></option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">Ward</label>
+                    <select id="renterWardCode" name="renterWardCode" class="form-select" th:disabled="${isDisabled}">
+                        <option th:value="${renter.address?.ward?.wardCode}"
+                                th:text="${renter.address?.ward?.ward}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <label class="form-label">Address Number</label>
+                <input type="text" class="form-control" name="renterAddressNumber"
+                       th:value="${renter.address?.addressNumber}" th:disabled="${isDisabled}">
+            </div>
+        </div>
+
+
+        <!-- Different Driver Checkbox -->
+
+        <div class="checkbox-group">
+            <input type="hidden" id="differentDriverHidden" name="differentDriver" value="false"/>
+            <input type="checkbox" id="differentDriverCheckbox" value="true" th:disabled="${isDisabled}"/>
+            <label for="differentDriverCheckbox">Use a different driver</label>
+        </div>
+        <div class="container-fluid">
+            <!-- Driver Information -->
+
+            <div id="driverInfo">
+                <h4>Driver Information</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label>Full Name</label>
+                            <input type="text" name="driverFullName" th:value="${driver.fullName}" th:disabled="${isDisabled}"/>
+                        </div>
+                        <div class="mb-3">
+                            <label>Phone</label>
+                            <input type="text" name="driverPhone" th:value="${driver.phoneNumber}" th:disabled="${isDisabled}"/>
+                        </div>
+                        <div class="mb-3">
+                            <label>National ID</label>
+                            <input type="text" name="driverNationalId" th:value="${driver.nationalId}" th:disabled="${isDisabled}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label>Driving License (optional)</label>
+                            <input type="file" id="driverLicense" name="driverLicense" accept="image/*,application/pdf"
+                                   style="display: none;" th:disabled="${isDisabled}">
+                            <label for="driverLicense" class="upload-btn">Upload</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Date of Birth</label>
+                            <input type="date" name="driverDob" th:value="${driver.dateOfBirth}" th:disabled="${isDisabled}"/>
+                        </div>
+                    </div>
+                    <h4>Driver Address</h4>
+                    City:
+                    <select id="driverCity" name="driverCity" th:disabled="${isDisabled}">
+                        <!-- Nếu đã có driver, hiển thị city của driver -->
+                        <option th:if="${driver != null and driver.address != null and driver.address.ward != null}"
+                                th:value="${driver.address.ward.cityProvince}"
+                                th:text="${driver.address.ward.cityProvince}"></option>
+
+                        <!-- Luôn hiển thị danh sách các thành phố -->
+                        <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+                    </select><br>
+
+                    District:
+                    <select id="driverDistrict" name="driverDistrict" th:disabled="${isDisabled}">
+                        <option th:value="${driver.address?.ward?.district}"
+                                th:text="${driver.address?.ward?.district}"></option>
+                    </select><br>
+
+                    Ward:
+                    <select id="driverWardCode" name="driverWardCode" th:disabled="${isDisabled}">
+                        <option th:value="${driver.address?.ward?.wardCode}"
+                                th:text="${driver.address?.ward?.ward}"></option>
+                    </select><br>
+
+                    Address Number:
+                    <input type="text" name="driverAddressNumber" th:value="${driver.address?.addressNumber}" th:disabled="${isDisabled}"/>
+
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn-success" th:if="${!isDisabled}">Update Booking</button>
+    </form>
+    </th:block>
+</div>
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let isDisabled = /*[[${isDisabled}]]*/ false;
+    if (isDisabled) {
+        const form = document.getElementById('bookingForm');
+        if (form) {
+            Array.from(form.elements).forEach(el => el.disabled = true);
+        }
+    }
+    /*]]>*/
+    document.addEventListener("DOMContentLoaded", function () {
+      let checkbox = document.getElementById("differentDriverCheckbox");
+      let hiddenInput = document.getElementById("differentDriverHidden");
+      let driverInfo = document.getElementById("driverInfo");
+
+      function updateHiddenInput() {
+        hiddenInput.value = checkbox.checked ? "true" : "false";
+      }
+
+      function toggleDriverInfo() {
+        driverInfo.style.display = checkbox.checked ? "block" : "none";
+      }
+
+      // Lắng nghe sự kiện thay đổi checkbox
+      checkbox.addEventListener("change", function () {
+        updateHiddenInput();
+        toggleDriverInfo();
+      });
+
+      // Gọi ngay khi trang load để đảm bảo giá trị đúng
+      updateHiddenInput();
+      toggleDriverInfo();
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("renterCity").addEventListener("change", function () {
+        fetch("/bookings/district?city=" + this.value)
+                .then(response => response.text())
+                .then(data => {
+                  document.getElementById("renterDistrict").innerHTML = data;
+                  document.getElementById("renterWardCode").innerHTML = "";
+                });
+      });
+
+      document.getElementById("renterDistrict").addEventListener("change", function () {
+        const city = document.getElementById("renterCity").value;
+        fetch("/bookings/ward?city=" + city + "&district=" + this.value)
+                .then(response => response.text())
+                .then(data => {
+                  document.getElementById("renterWardCode").innerHTML = data;
+                });
+      });
+
+      document.getElementById("driverCity").addEventListener("change", function () {
+        fetch("/bookings/district?city=" + this.value)
+                .then(response => response.text())
+                .then(data => {
+                  document.getElementById("driverDistrict").innerHTML = data;
+                  document.getElementById("driverWardCode").innerHTML = "";
+                });
+      });
+
+      document.getElementById("driverDistrict").addEventListener("change", function () {
+        const city = document.getElementById("driverCity").value;
+        fetch("/bookings/ward?city=" + city + "&district=" + this.value)
+                .then(response => response.text())
+                .then(data => {
+                  document.getElementById("driverWardCode").innerHTML = data;
+                });
+      });
+    });
+     function prevSlide(button) {
+        let container = button.closest('.image-container');
+        let slider = container.querySelector('.slider');
+        let slides = container.querySelectorAll('.slide');
+        let currentIndex = parseInt(slider.getAttribute("data-current-index")) || 0;
+
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateSlide(slider, currentIndex);
+        }
+    }
+
+    function nextSlide(button) {
+        let container = button.closest('.image-container');
+        let slider = container.querySelector('.slider');
+        let slides = container.querySelectorAll('.slide');
+        let currentIndex = parseInt(slider.getAttribute("data-current-index")) || 0;
+
+        if (currentIndex < slides.length - 1) {
+            currentIndex++;
+            updateSlide(slider, currentIndex);
+        }
+    }
+
+    function updateSlide(slider, index) {
+        slider.style.transform = `translateX(-${index * 100}%)`;
+        slider.setAttribute("data-current-index", index);
+    }
+</script>
+
+</body>
+</html>

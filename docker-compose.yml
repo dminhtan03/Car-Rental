@@ -1,0 +1,41 @@
+services:
+  redis:
+    container_name: redis--final-project
+    image: redis:7.2
+    ports:
+      - "6379:6379"
+    networks:
+      - final-project
+
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: finalproject
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3307:3306"
+    networks:
+      - final-project
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  rabbitmq:
+    container_name: rabbitmq-dev-pet-project
+    image: rabbitmq:3.11-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - final-project
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+networks:
+  final-project:
+    driver: bridge
+
+volumes:
+  mysql-data:

@@ -1,0 +1,556 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 100%; /* Stretch to full width */
+    padding: 0; /* Remove horizontal padding to allow full width */
+}
+
+
+.change-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.booking-details {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.booking-details li {
+    margin: 5px 0;
+}
+
+.progress-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 0 20px; /* Add minimal padding for readability */
+    width: 100%; /* Ensure full width */
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 0; /* Remove border-radius for full-width consistency */
+    cursor: pointer;
+}
+
+.step.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.step-content {
+    flex-direction: column; /* Stack children vertically */
+    /* Any other necessary styles */
+}
+
+/* Unified frame styling */
+.unified-frame {
+    border: 1px solid #ddd;
+    border-radius: 0; /* Remove border-radius for full-width consistency */
+    overflow: hidden; /* Ensures the border applies to children */
+    display: flex;
+    background-color: white;
+    width: 100%; /* Ensure full width */
+}
+
+.vehicle-info, .booking-summary {
+    flex: 1;
+    padding: 20px; /* Thay từ đoạn bạn cung cấp */
+}
+
+.vehicle-info {
+    border-right: 2px solid #ddd; /* Vertical line in the middle - Thay từ đoạn bạn cung cấp */
+}
+
+.vehicle-image img {
+    max-width: 100%; /* Thay từ đoạn bạn cung cấp */
+    height: auto; /* Thay từ đoạn bạn cung cấp */
+    margin-bottom: 10px; /* Thay từ đoạn bạn cung cấp */
+}
+
+.vehicle-details h3, .booking-summary h3 {
+    margin-bottom: 10px; /* Thay từ đoạn bạn cung cấp (h3 thay vì h2 cho booking-summary) */
+}
+
+.vehicle-details {
+    padding: 20px; /* Đã có từ .vehicle-info, giữ lại để rõ ràng */
+}
+
+.vehicle-details p {
+    display: flex; /* Sử dụng flexbox để căn chỉnh nhãn và giá trị */
+    justify-content: flex-start; /* Căn trái toàn bộ nội dung */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin: 8px 0; /* Khoảng cách giữa các dòng */
+}
+
+.vehicle-details p::before {
+    content: attr(data-label); /* Lấy nội dung từ thuộc tính data-label */
+    width: 120px; /* Chiều rộng cố định cho nhãn (có thể điều chỉnh) */
+    min-width: 120px; /* Đảm bảo nhãn không bị co lại */
+    font-weight: 500; /* Độ đậm vừa phải cho nhãn */
+    color: #333; /* Màu chữ nhãn */
+}
+
+.vehicle-details p span {
+    font-weight: 700; /* Làm đậm giá trị trong <span> */
+    color: #333; /* Màu chữ giá trị (giữ đồng nhất với nhãn) */
+}
+
+/* Booking Summary styling */
+.booking-summary {
+    display: flex;
+    flex-direction: column;
+    padding: 20px; /* Giữ padding mặc định */
+}
+
+.booking-summary h2 {
+    text-align: left; /* Căn trái tiêu đề */
+    margin-bottom: 20px; /* Tăng khoảng cách dưới tiêu đề lên 20px để cách xa summary-items */
+    font-size: 24px; /* Tăng kích thước tiêu đề lên 24px cho rõ ràng */
+}
+
+.summary-items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Giữ căn phải */
+    font-size: 22px; /* Tăng kích thước chữ lên 22px (to hơn nữa so với 18px trước đó) */
+    font-weight: 500; /* Độ đậm vừa phải */
+    padding: 20px; /* Tăng padding lên 20px để tạo không gian rộng rãi hơn */
+    border-radius: 4px; /* Bo góc nhẹ */
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+}
+
+.summary-items p {
+    margin: 10px 0; /* Tăng khoảng cách giữa các dòng lên 10px để thoáng hơn */
+    color: #333; /* Màu chữ chính đậm hơn cho dễ đọc */
+}
+
+.summary-items p span {
+    font-weight: 700; /* Làm đậm các giá trị trong <span> */
+    /* Không đổi màu, giữ nguyên màu mặc định của span (thường là #000) */
+}
+
+.divider {
+    border: 1px solid #999; /* Giữ đường kẻ đậm hơn */
+    margin: 15px 0; /* Khoảng cách trên dưới */
+    width: 70%; /* Độ dài đường kẻ 70% */
+    margin-left: auto; /* Căn phải */
+}
+
+/* Renter's Information styling */
+.renter-info {
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%; /* Ensure full width */
+}
+
+.renter-info h2 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Driver's Information styling */
+.driver-info {
+    padding: 20px;
+    width: 100%; /* Ensure full width */
+}
+
+.driver-info h2 {
+    margin-bottom: 5px; /* Reduced margin to accommodate checkbox */
+    font-size: 18px;
+    color: #333;
+}
+
+/* Shared form styling for both Renter's and Driver's Information */
+.renter-info form,
+.driver-info form {
+    display: grid; /* Use CSS Grid for layout */
+    grid-template-columns: 1fr 1fr; /* Two columns for left-right layout */
+    gap: 15px; /* Space between form groups */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group label:after {
+    content: " *";
+    color: red;
+    display: none; /* Hide asterisk by default, show for required fields */
+}
+
+.form-group[required] label:after {
+    display: inline; /* Show asterisk for required fields */
+}
+
+.form-group input,
+.form-group select {
+    padding: 8px; /* Adjust padding for input fields */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 4px; /* Rounded corners for inputs */
+    font-size: 14px; /* Font size */
+    width: 300px; /* Use 100% width of the column */
+}
+
+.form-group input[type="date"] {
+    position: relative;
+}
+
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+    display: block; /* Show calendar icon for date input */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+}
+
+.upload-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px; /* Maintain padding but reduce width */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    font-size: 12px; /* Smaller font size for a smaller button */
+    width: 100px; /* Fixed width of 100px as requested */
+}
+
+.upload-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Ensure the file inputs are hidden, and the labels act as the buttons */
+
+/* Address Group styling for both Renter and Driver */
+.address-group,
+.address-group-driver {
+    grid-column: span 2; /* Ensure address group spans both columns */
+    margin-top: 10px; /* Space above the address group */
+}
+
+.address-group label,
+.address-group-driver label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.address-fields {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Four equal columns for address fields */
+    gap: 15px; /* Space between address fields */
+}
+.address-fields,
+.address-fields-driver {
+    display: flex;
+    flex-direction: column; /* Stack address fields vertically */
+    gap: 10px; /* Spacing between fields */
+}
+
+.address-fields .form-group,
+.address-fields-driver .form-group {
+    margin: 0; /* Remove default margins for alignment */
+}
+
+/* Make address input fields even longer (wider) for both Renter and Driver */
+.address-fields .form-group input,
+.address-fields .form-group select,
+.address-fields-driver .form-group input,
+.address-fields-driver .form-group select {
+    width: 600px; /* Even longer width for address inputs (adjust as needed) */
+}
+
+/* Checkbox styling */
+.checkbox-group {
+    padding: 0 20px; /* Match padding with .driver-info */
+    margin-top: 10px; /* Space below the heading */
+    margin-bottom: 15px; /* Space before the form starts */
+    width: 100%; /* Ensure full width */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between checkbox and label */
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+.checkbox-group label {
+    font-size: 14px;
+    color: #333;
+}
+
+.next-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.next-btn:hover {
+    background-color: #0056b3;
+}
+
+.cancel-link {
+    color: #dc3545; /* Red color for cancel link */
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 20px;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.cancel-link:hover {
+    background-color: #dc3545;
+    color: white;
+}
+/* Adjust payment-method margin to ensure spacing with booking-confirmation */
+.payment-method {
+    padding: 20px;
+    width: 100%; /* Ensure full width */
+    background-color: white;
+}
+
+.payment-method h2 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #333;
+    text-align: left;
+}
+
+.payment-options {
+    margin-bottom: 20px;
+}
+
+.payment-options label {
+    margin-left: 60px;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.payment-options input[type="radio"] {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.payment-options p {
+    font-style: italic;
+    margin-left: 90px; /* Indent text below radio buttons */
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.payment-actions {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    gap: 20px; /* Space between buttons */
+    margin-top: 20px;
+}
+
+.cancel-btn, .confirm-btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+}
+
+.cancel-btn {
+    background-color: #fff;
+    color: #dc3545; /* Red color for Cancel button */
+    border: 1px solid #dc3545;
+}
+
+.cancel-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.confirm-btn {
+    background-color: #007bff; /* Blue color for Confirm payment button */
+    color: white;
+}
+
+.confirm-btn:hover {
+    background-color: #0056b3;
+}
+
+.payment-note {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* Adjust navigation-buttons margin to ensure spacing with payment-method */
+.navigation-buttons {
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+    gap: 10px; /* Space between button and link */
+    margin: 30px 30px 20px 30px; /* Top, right, bottom, left margins */
+}
+/* Booking Confirmation styling */
+/* Booking Confirmation styling */
+.booking-confirmation {
+    padding: 20px;
+    width: 100%; /* Ensure full width */
+    background-color: white;
+    text-align: left; /* Align all content (including h1) to the left */
+}
+
+.booking-confirmation h1 {
+    margin-left: 30px;
+    margin-bottom: 20px;
+    font-size: 20px; /* Larger font size for h1 to match heading importance */
+    color: #333;
+}
+
+.confirmation-actions {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    gap: 20px; /* Space between buttons */
+    margin-top: 20px;
+}
+
+.homepage-btn, .book-another-btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #ccc; /* Gray border for buttons */
+    background-color: white;
+    color: #333;
+}
+
+.homepage-btn:hover, .book-another-btn:hover, .view-booking-btn:hover {
+    background-color: #e9ecef; /* Light gray hover effect */
+}
+/* General styles for all input and select elements */
+input, select {
+    width: 100%; /* Full width for most form elements */
+    padding: 10px; /* Padding for touch friendliness */
+    margin-bottom: 15px; /* Spacing below elements */
+    border: 1px solid #ccc; /* Border for inputs */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 14px; /* Font size */
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 15px; /* Space between columns */
+}
+
+.address-fields, .address-fields-driver {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns for address fields */
+    gap: 15px; /* Space between address fields */
+}
+.cancel-btn, .next-btn {
+    padding: 10px 20px; /* Button padding */
+    background-color: #007BFF; /* Button color */
+    color: #fff; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+.cancel-btn, .next-btn, .confirm-btn {
+    padding: 10px 20px; /* Button padding */
+    background-color: #007BFF; /* Primary button color */
+    color: #fff; /* Text color */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    text-decoration: none; /* Remove underline for links */
+    cursor: pointer; /* Pointer cursor for buttons */
+    transition: background-color 0.3s; /* Smooth transition for hover effects */
+}
+
+.cancel-btn:hover, .next-btn:hover, .confirm-btn:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+/* Preview image styles */
+#previewContainer, #previewContainerDriver {
+    margin-top: 10px; /* Space for preview container */
+    display: flex; /* Flex layout for content */
+    flex-direction: column; /* Arrange items vertically */
+}
+
+.img-thumbnail {
+    border: 1px solid #ddd; /* Basic border for images */
+    border-radius: 4px; /* Rounded corners for images */
+}
+.short-input {
+    width: auto; /* Allow auto width for shorter fields */
+    display: inline-block; /* Align inline with other elements if necessary */
+    max-width: 200px; /* Set maximum width for the input */
+}
+
+.unified-frame-step3 {
+    border: 1px solid #ddd;
+    border-radius: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Xếp nội dung theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều dọc */
+    background-color: white;
+    width: 100%;
+    padding: 20px;
+}
+
+.unified-frame-step3 p {
+    text-align: left; /* Căn trái nội dung */
+    width: 100%; /* Đảm bảo nội dung không bị bó hẹp */
+    margin: 10px 0; /* Khoảng cách trên dưới giữa các đoạn */
+}
+
+/* Căn giữa các nút */
+.button-container {
+    text-align: center;
+}
+
+/* Tùy chỉnh nút */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}

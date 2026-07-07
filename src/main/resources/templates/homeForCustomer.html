@@ -1,0 +1,559 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from dreamsrent.dreamstechnologies.com/html/template/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Mar 2025 09:46:15 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Dreams Rent | Template</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/img/favicon.png}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/all.min.css}">
+
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/select2/css/select2.min.css}">
+
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-datetimepicker.min.css}">
+
+    <!-- Aos CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/aos/aos.css}">
+
+    <!-- Fearther CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/feather.css}">
+
+    <!-- Owl carousel CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+
+    <!-- Boxicons CSS -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/boxicons/css/boxicons.min.css}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <style>
+        .locations {
+            padding: 50px;
+            text-align: center;
+        }
+
+        .location-grid {
+            display: grid; /* Sử dụng grid để tạo bố cục */
+            grid-template-columns: repeat(3, 1fr); /* 3 cột */
+            gap: 40px; /* Tăng khoảng cách giữa các khung */
+        }
+
+        .location {
+            position: relative; /* Để định vị thẻ span */
+            border-radius: 8px;
+            overflow: hidden; /* Để không hiển thị phần thừa */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px; /* Thêm khoảng cách dưới mỗi khung */
+        }
+
+        .locations h2 {
+            margin-bottom: 30px; /* Thêm khoảng cách dưới tiêu đề */
+        }
+
+        .location img {
+            width: 100%; /* Đặt chiều rộng hình ảnh chiếm toàn bộ khung */
+            height: 100%; /* Đặt chiều cao hình ảnh chiếm toàn bộ khung */
+            object-fit: cover; /* Đảm bảo hình ảnh bao trùm mà không bị biến dạng */
+        }
+
+        .location span {
+            position: absolute; /* Định vị tuyệt đối */
+            bottom: 10px; /* Cách đáy 10px */
+            left: 10px; /* Cách trái 10px */
+            color: white; /* Màu chữ */
+            background: rgba(0, 0, 0, 0.5); /* Nền bán trong suốt */
+            padding: 5px; /* Khoảng cách bên trong */
+            border-radius: 5px; /* Bo tròn cho nền */
+        }
+
+        .testimonial-item {
+            min-height: 250px; /* Đặt chiều cao tối thiểu */
+            display: flex;
+            align-items: center;
+        }
+
+        .card {
+            height: 100%; /* Giữ chiều cao cố định */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body {
+            flex: 1; /* Giúp nội dung co giãn đồng đều */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .review-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .list-rating {
+            margin-top: auto; /* Đẩy phần rating xuống dưới cùng */
+        }
+
+        .suggestion-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-top: none;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .suggestion-list li {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+
+        .suggestion-list li:hover {
+            background-color: #f5f6fa;
+        }
+
+        .group-img {
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+
+    <div th:insert="~{header :: header}"></div>
+
+    <!-- Banner -->
+    <section class="banner-section banner-slider">
+        <div class="container">
+            <div class="home-banner">
+                <div class="row align-items-center">
+                    <div class="col-lg-6" data-aos="fade-down">
+                        <p class="explore-text"><span><i class="fa-solid fa-thumbs-up me-2"></i></span>100% Trusted car
+                            rental platform in the World</p>
+                        <h1><span>Looking for a vehicle ?</span> <br>
+                            You're at the right place.</h1>
+                        <p>We have a large selection of locally owned cars available for you to choose from. Rental
+                            plans are customised to suit your needs.</p>
+                        <p>With over 300 cars located nationwide we will have something for you.</p>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-down">
+                        <div class="banner-imgs">
+                            <img src="/assets/img/car-right.png" class="img-fluid aos" alt="bannerimage">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Banner -->
+
+    <!-- Search -->
+    <div class="section-search">
+        <div class="container">
+            <div class="search-box-banner">
+                <form th:action="@{/searchByLocation}" method="get">
+                    <ul class="align-items-center">
+                        <li class="column-group-main">
+                            <div class="input-block">
+                                <label>Pickup Location</label>
+                                <div class="group-img">
+                                    <input type="text" id="search-input-new" name="search"
+                                           placeholder="Enter City, Airport, or Address"
+                                           class="form-control" required>
+                                    <ul id="suggestion-list-new" class="suggestion-list"></ul>
+                                    <span><i class="feather-map-pin"></i></span>
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="column-group-main">
+                            <div class="input-block">
+                                <label>Pickup Date</label>
+                            </div>
+                            <div class="input-block-wrapp">
+                                <div class="input-block date-widget">
+                                    <div class="group-img">
+                                        <input type="text" class="form-control datetimepicker" name="pickupDate" required>
+                                        <span><i class="feather-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <div class="input-block time-widge">
+                                    <div class="group-img">
+                                        <input type="text" class="form-control timepicker" name="pickupTime" required>
+                                        <span><i class="feather-clock"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="column-group-main">
+                            <div class="input-block">
+                                <label>Return Date</label>
+                            </div>
+                            <div class="input-block-wrapp">
+                                <div class="input-block date-widge">
+                                    <div class="group-img">
+                                        <input type="text" class="form-control datetimepicker" name="dropoffDate" required>
+                                        <span><i class="feather-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <div class="input-block time-widge">
+                                    <div class="group-img">
+                                        <input type="text" class="form-control timepicker" name="dropoffTime" required>
+                                        <span><i class="feather-clock"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="column-group-last">
+                            <div class="input-block">
+                                <div class="search-btn">
+                                    <button class="btn search-button" type="submit"><i class="fa fa-search"
+                                                                                       aria-hidden="true"></i>Search
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /Search -->
+
+    <!-- services -->
+    <section class="section services">
+        <div class="service-right">
+            <img src="/assets/img/bg/service-right.svg" class="img-fluid" alt="services right">
+        </div>
+        <div class="container">
+            <!-- Heading title-->
+            <div class="section-heading" data-aos="fade-down">
+                <h2>Why Choose Us ?</h2>
+                <p>We are innovative and passionate about the work we do. </p>
+            </div>
+            <!-- /Heading title -->
+            <div class="services-work">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-12 d-flex" data-aos="fade-down">
+                        <div class="services-group service-book flex-fill">
+                            <div class="services-icon border-dark">
+                                <img class="icon-img bg-white" src="/imgHomeGuest/dollar-bill.png" alt="Save Money"/>
+                            </div>
+                            <div class="services-content">
+                                <h3>Save Money</h3>
+                                <p>We have no setup or registration fees. You are only charged when you rent a car. So
+                                    get started for
+                                    FREE!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-12 d-flex" data-aos="fade-down">
+                        <div class="services-group service-book flex-fill">
+                            <div class="services-icon border-dark">
+                                <img class="icon-img bg-white" src="/imgHomeGuest/location-pin.png"
+                                     alt="Choose Locations">
+                            </div>
+                            <div class="services-content">
+                                <h3>Convenient</h3>
+                                <p>We have a large selection of privately owned cars to suit your needs throughout the
+                                    country.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-12 d-flex" data-aos="fade-down">
+                        <div class="services-group service-book flex-fill">
+                            <div class="services-icon border-dark">
+                                <img class="icon-img bg-white" src="/imgHomeGuest/legal-department.jpg"
+                                     alt="Convenient"/>
+                            </div>
+                            <div class="services-content">
+                                <h3>Legal and Insurance</h3>
+                                <p>We fully cover all rentals and even provide roadside assistance. Our rating system
+                                    ensures
+                                    safety.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-12 d-flex" data-aos="fade-down">
+                        <div class="services-group service-book flex-fill">
+                            <div class="services-icon border-dark">
+                                <img class="icon-img bg-white" src="/imgHomeGuest/headphone.png"
+                                     alt="Choose Locations">
+                            </div>
+                            <div class="services-content">
+                                <h3>24/7 Support</h3>
+                                <p>Our team is ready to support you all the way with our 24/7 hotline and services.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /services -->
+
+    <!-- About us Testimonials -->
+    <section class="section about-testimonial testimonials-section">
+        <div class="container">
+            <!-- Heading title-->
+            <div class="section-heading" data-aos="fade-down">
+                <h2 class="title text-white">What People Say?</h2>
+                <p class="description text-white">Discover what our customers think about us</p>
+            </div>
+            <!-- /Heading title -->
+
+            <div class="row">
+                <!-- Lặp qua danh sách feedback -->
+                <th:block th:each="feedback, iterStat : ${feedbacks}">
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <!-- Ảnh đại diện -->
+                                    <img src="/assets/img/avatar.jpg" class="rounded-circle me-3" width="60" height="60" alt="User Avatar">
+                                    <div>
+                                        <h6 class="mb-1" th:text="${feedback.user?.fullName ?: 'Unknown User'}">User Name</h6>
+                                        <p class="text-muted" th:text="${feedback.user?.address?.ward?.cityProvince ?: 'Unknown Location'}">User Location</p>
+                                    </div>
+                                </div>
+                                <!-- Nội dung feedback -->
+                                <p class="mt-3" th:text="${feedback.comments ?: 'No feedback available'}">Feedback Content</p>
+                                <!-- Xếp hạng sao -->
+                                <div class="list-rating">
+                                    <th:block th:if="${feedback.rating != null}">
+                                        <th:block th:each="star : ${#numbers.sequence(1, feedback.rating)}">
+                                            <i class="fas fa-star text-warning"></i>
+                                        </th:block>
+                                        <span class="ms-2 text-muted" th:text="'(' + ${feedback.rating} + '.0)'">(5.0)</span>
+                                    </th:block>
+                                    <th:block th:if="${feedback.rating == null}">
+                                        <span class="text-muted">No rating</span>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About us Testimonials -->
+
+    <!-- Popular Services -->
+    <!-- Địa điểm của chúng tôi -->
+    <section class="locations">
+        <h2>Where to find us?</h2>
+        <div class="location-grid">
+            <div class="location">
+                <img th:src="@{/imgCity/HaNoi.jpg}" alt="Hanoi" />
+                <span>Hanoi</span>
+            </div>
+            <div class="location">
+                <img th:src="@{/imgCity/SaiGon.jpg}" alt="Ho Chi Minh City" />
+                <span>Ho Chi Minh City</span>
+            </div>
+            <div class="location">
+                <img th:src="@{/imgCity/HoiAn.jpg}" alt="Da Nang - Hoi An" />
+                <span>Da Nang - Hoi An</span>
+            </div>
+            <div class="location">
+                <img th:src="@{/imgCity/NhaTrang.jpg}" alt="Nha Trang" />
+                <span>Nha Trang</span>
+            </div>
+            <div class="location">
+                <img th:src="@{/imgCity/DaLat.jpg}" alt="Da Lat" />
+                <span>Da Lat</span>
+            </div>
+            <div class="location">
+                <img th:src="@{/imgCity/QuangNinh.jpg}" alt="Quang Ninh" />
+                <span>Quang Ninh</span>
+            </div>
+        </div>
+    </section>
+    <!-- /Popular Services -->
+
+
+    <!-- Footer -->
+    <div th:insert="~{footer :: footer}"></div>
+    <!-- /Footer -->
+
+</div>
+
+<!-- scrollToTop start -->
+<div class="progress-wrap active-progress">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+              style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919px, 307.919px; stroke-dashoffset: 228.265px;"></path>
+    </svg>
+</div>
+<!-- scrollToTop end -->
+
+<!-- jQuery -->
+<script src="/assets/js/jquery-3.7.1.min.js"></script>
+
+<!-- Bootstrap Core JS -->
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+<!-- counterup JS -->
+<script src="/assets/js/jquery.waypoints.js"></script>
+<script src="/assets/js/jquery.counterup.min.js"></script>
+
+<!-- Select2 JS -->
+<script src="/assets/plugins/select2/js/select2.min.js"></script>
+
+<!-- Aos -->
+<script src="/assets/plugins/aos/aos.js"></script>
+
+<!-- Top JS -->
+<script src="/assets/js/backToTop.js"></script>
+
+<!-- Datepicker Core JS -->
+<script src="/assets/plugins/moment/moment.min.js"></script>
+<script src="/assets/js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- Owl Carousel JS -->
+<script src="/assets/js/owl.carousel.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/assets/js/script.js"></script>
+
+<script>
+    $(document).ready(function () {
+        const $searchInput = $('#search-input-new');
+        const $suggestionList = $('#suggestion-list-new');
+        let timeout;
+
+        $searchInput.on('input', function () {
+            clearTimeout(timeout);
+            const keyword = $(this).val().trim();
+            if (keyword.length < 2) {
+                $suggestionList.empty().hide();
+                return;
+            }
+
+            timeout = setTimeout(function () {
+                $.ajax({
+                    url: '/location-suggestions',
+                    type: 'GET',
+                    data: { keyword: keyword },
+                    success: function (suggestions) {
+                        $suggestionList.empty();
+                        if (suggestions.length > 0) {
+                            suggestions.forEach(function (suggestion) {
+                                $suggestionList.append(`<li>${suggestion}</li>`);
+                            });
+                            $suggestionList.show();
+                        } else {
+                            $suggestionList.hide();
+                        }
+                    },
+                    error: function () {
+                        $suggestionList.empty().hide();
+                    }
+                });
+            }, 300);
+        });
+
+        $suggestionList.on('click', 'li', function () {
+            $searchInput.val($(this).text());
+            $suggestionList.empty().hide();
+        });
+
+        $(document).on('click', function (e) {
+            if (!$(e.target).closest('.group-img').length) {
+                $suggestionList.hide();
+            }
+        });
+        
+        // Initialize date/time pickers with validation rules
+        
+        // Set minimum date for pickup to today
+        $('.datetimepicker[name="pickupDate"]').datetimepicker({
+            format: 'MM/DD/YYYY',
+            minDate: moment().startOf('day'),
+            maxDate: moment().add(1, 'year'), // Max 1 year in advance
+        });
+        
+        // Set time picker
+        $('.timepicker').datetimepicker({
+            format: 'LT'
+        });
+        
+        // Configure return date picker with validation
+        $('.datetimepicker[name="dropoffDate"]').datetimepicker({
+            format: 'MM/DD/YYYY',
+            useCurrent: false, // Important to prevent return date from automatically being set to pickup date
+        });
+        
+        // When pickup date changes, update return date minimum
+        $('.datetimepicker[name="pickupDate"]').on('dp.change', function(e) {
+            $('.datetimepicker[name="dropoffDate"]').data('DateTimePicker').minDate(e.date);
+            
+            // If return date is before the new pickup date, set it to the pickup date
+            let returnDate = $('.datetimepicker[name="dropoffDate"]').data('DateTimePicker').date();
+            if (returnDate && returnDate.isBefore(e.date)) {
+                $('.datetimepicker[name="dropoffDate"]').data('DateTimePicker').date(e.date);
+            }
+        });
+        
+        // Validate form on submit
+        $('form[action="/searchByLocation"]').on('submit', function(e) {
+            const pickupDate = $('.datetimepicker[name="pickupDate"]').data('DateTimePicker').date();
+            const dropoffDate = $('.datetimepicker[name="dropoffDate"]').data('DateTimePicker').date();
+            
+            // Check if dates are selected
+            if (!pickupDate || !dropoffDate) {
+                alert('Please select both pickup and return dates');
+                e.preventDefault();
+                return false;
+            }
+            
+            // Check if return date is after pickup date
+            if (dropoffDate.isSameOrBefore(pickupDate)) {
+                alert('Return date must be after pickup date');
+                e.preventDefault();
+                return false;
+            }
+            
+            // Check maximum rental duration (30 days)
+            const rentalDays = dropoffDate.diff(pickupDate, 'days');
+            if (rentalDays > 30) {
+                alert('Maximum rental duration is 30 days');
+                e.preventDefault();
+                return false;
+            }
+            
+            return true;
+        });
+    });
+</script>
+</body>
+
+<!-- Mirrored from dreamsrent.dreamstechnologies.com/html/template/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Mar 2025 09:47:31 GMT -->
+</html>
