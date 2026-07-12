@@ -1,6 +1,8 @@
 package com.HN25_CPL_PJB_01_G4.com.car_rental.Controller;
 
 import com.HN25_CPL_PJB_01_G4.com.car_rental.Entity.Request.ChangePasswordRequest;
+import com.HN25_CPL_PJB_01_G4.com.car_rental.Entity.Request.ForgotPasswordRequest;
+import com.HN25_CPL_PJB_01_G4.com.car_rental.Entity.Request.ForgotPasswordVerifyRequest;
 import com.HN25_CPL_PJB_01_G4.com.car_rental.Entity.Request.RegistrationRequest;
 import com.HN25_CPL_PJB_01_G4.com.car_rental.Service.UserService;
 import com.HN25_CPL_PJB_01_G4.com.car_rental.common.payload.Response;

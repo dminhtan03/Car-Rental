@@ -1,8 +1,8 @@
 package com.HN25_CPL_PJB_01_G4.com.car_rental.Controller;
 
-import com.datien.petproject.common.payload.Response;
-import com.datien.petproject.model.dto.request.LoginRequest;
-import com.datien.petproject.service.AuthService;
+import com.HN25_CPL_PJB_01_G4.com.car_rental.Entity.Request.LoginRequest;
+import com.HN25_CPL_PJB_01_G4.com.car_rental.Service.AuthService;
+import com.HN25_CPL_PJB_01_G4.com.car_rental.common.payload.Response;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
