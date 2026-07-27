@@ -1,0 +1,67 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3307/finalproject
+    username: appuser
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 210MB
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: bookingroom2025@gmail.com
+    password: gvknymmujvytojro
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+application:
+  security:
+    jwt:
+      secret-key: YoVBs+fSApwsrc0fZeUG7tFtyRjc4nIixENeTMlkwSXdmnCSS48XPYhUO29JPqeO
+      expiration: 9000000
+      refresh-token:
+        expiration: 604800000
+    google:
+      client-id: 144477910293-ee1pdggtphn3lskpogcomk55s08qd0n6.apps.googleusercontent.com
+  character:
+    value: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%
+
+  mailing:
+    frontend:
+      activation-url: http://localhost:1080/activate-account
+
+  file:
+    uploads:
+      photos-output-path: ./uploads
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+
+redis:
+  host: localhost
+  port: 6379

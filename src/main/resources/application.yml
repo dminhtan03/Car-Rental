@@ -1,101 +1,21 @@
-#cloudinary:
-#  cloud-name: ${CLOUDINARY_CLOUD_NAME:ds8upcxgo}
-#  api-key: ${CLOUDINARY_API_KEY:dummy_key}
-#  api-secret: ${CLOUDINARY_API_SECRET:dummy_secret}
-
 spring:
-#  config:
-#    import: >-
-#      optional:file:.env[.properties],
-#      optional:file:BookingMeetingRoom/.env[.properties],
-#      optional:file:env.properties,
-#      optional:file:BookingMeetingRoom/env.properties
-  datasource:
-    url: jdbc:mysql://localhost:3307/finalproject
-    username: appuser
-    password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: false
-    properties:
-      hibernate:
-        format_sql: true
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+  profiles:
+    active: local
   servlet:
     multipart:
-      max-file-size: 200MB
-      max-request-size: 210MB
-
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: bookingroom2025@gmail.com
-    password: gvknymmujvytojro
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls.enable: true
-          connectiontimeout: 5000
-          timeout: 3000
-          writetimeout: 5000
-
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-
-application:
-  security:
-    jwt:
-      secret-key: YoVBs+fSApwsrc0fZeUG7tFtyRjc4nIixENeTMlkwSXdmnCSS48XPYhUO29JPqeO
-      expiration: 9000000
-      refresh-token:
-        expiration: 604800000
-    google:
-      client-id: 144477910293-ee1pdggtphn3lskpogcomk55s08qd0n6.apps.googleusercontent.com
-  character:
-    value: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%
-
-  mailing:
-    frontend:
-      activation-url: http://localhost:1080/activate-account
-
-  file:
-    uploads:
-      photos-output-path: ./uploads
-
-  ai:
-    llm:
+      max-file-size: 50MB
+      max-request-size: 50MB
       enabled: true
-      base-url: https://api.openai.com/v1
-      model: gpt-4o-mini
-      api-key: ${AI_LLM_API_KEY:}
-      timeout-ms: 10000
-      quota-cooldown-ms: 5000
-
-#ai:
-#  platform:
-#    url: http://localhost:8080
-#    app-name: ${APP_NAME:AI Platform}
-#    app-version: ${APP_VERSION:0.1.0}
-#    base-url: https://api.openai.com/v1
-#    model: ${OPENAI_MODEL:gpt-4o-mini}
-#    api-key: ${OPENAI_API_KEY:}
-#    timeout-ms: 120000
-#    stt-timeout-ms: 300000
-#
-#audio:
-#  dir: ./audio
-
 springdoc:
-  api-docs:
-    path: /v3/api-docs
+  default-produces-media-type: application/json
 
-redis:
-  host: localhost
-  port: 6379
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+  endpoint:
+    health:
+      show-details: always
+  server:
+    port: 8081

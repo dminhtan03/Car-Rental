@@ -1,0 +1,57 @@
+#spring:
+#  datasource:
+#    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/finalproject}
+#    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+#    password: ${SPRING_DATASOURCE_PASSWORD:tiendat1409}
+#    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
+#    database: postgresql
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#  servlet:
+#    multipart:
+#      max-file-size: 10MB
+#      max-request-size: 20MB
+#
+#  mail:
+#    host: ${SPRING_MAIL_HOST:mail-dev-pet-project}
+#    port: ${SPRING_MAIL_PORT:1025}
+#    properties:
+#      mail:
+#        smtp:
+#          auth: false
+#          starttls.enable: false
+#          connectiontimeout: 5000
+#          timeout: 3000
+#          writetimeout: 5000
+#
+#application:
+#  security:
+#    jwt:
+#      secret-key: YoVBs+fSApwsrc0fZeUG7tFtyRjc4nIixENeTMlkwSXdmnCSS48XPYhUO29JPqeO
+#      expiration: 8640000
+#      refresh-token:
+#        expiration: 604800000
+#  character:
+#    value: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%
+#  mailing:
+#    frontend:
+#      activation-url: ${APPLICATION_MAILING_FRONTEND_ACTIVATION_URL:http://172.27.112.1:1080/activate-account}
+#  file:
+#    uploads:
+#      photos-output-path: ./uploads
+#
+#springdoc:
+#  api-docs:
+#    path: /v3/api-docs
+#  swagger-ui:
+#    path: /swagger-ui.html
+#
+#redis:
+#  host: ${SPRING_REDIS_HOST:redis--pet-project}
+#  port: ${SPRING_REDIS_PORT:6379}
