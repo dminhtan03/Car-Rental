@@ -3,6 +3,7 @@ package com.project.rentalcar.service.impl;
 import com.project.rentalcar.common.exception.CustomException;
 import com.project.rentalcar.common.payload.ResponseCode;
 import com.project.rentalcar.common.utils.JwtUtils;
+import com.project.rentalcar.model.dto.response.UserResponse;
 import com.project.rentalcar.model.entity.User;
 import com.project.rentalcar.model.dto.request.LoginRequest;
 import com.project.rentalcar.model.dto.response.AuthResponse;
@@ -155,6 +156,34 @@ public class AuthServiceImpl implements AuthService {
             return AuthResponse.builder()
                     .accessToken(newAccessToken)
                     .refreshToken(newRefreshToken)
+                    .build();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new CustomException(ResponseCode.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public UserResponse getProfile(HttpServletRequest request) {
+        try {
+            String authHeader = request.getHeader("Authorization");
+
+            String accessToken = authHeader.substring(7);
+
+            String userEmail = jwtUtils.extractUsername(accessToken);
+            var user = userRepository.findByEmail(userEmail)
+                    .orElseThrow(() -> new CustomException(ResponseCode.USER_NOT_FOUND));
+            var userInfo = user.getUserInfo();
+
+            return UserResponse.builder()
+                    .id(user.getId())
+                    .firstName(userInfo.getFirstName())
+                    .lastName(userInfo.getLastName())
+                    .email(userInfo.getEmail())
+                    .phoneNumber(userInfo.getPhoneNumber())
+                    .address(userInfo.getAddress())
+                    .department(userInfo.getDepartment())
+                    .gender(userInfo.getGender())
                     .build();
         } catch (Exception e) {
             logger.error(e.getMessage());

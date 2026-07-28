@@ -3,8 +3,6 @@ package com.project.rentalcar.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.UUID;
-
 @Data
 @Entity
 @Table(name = "tbl_user_info")
@@ -21,6 +19,9 @@ public class UserInfo {
 
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
+
+    @Column(name = "DEPARTMENT")
+    private String department;
 
     @Column(name = "ADDRESS")
     private String address;

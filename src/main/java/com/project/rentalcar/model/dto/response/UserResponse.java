@@ -1,12 +1,15 @@
 package com.project.rentalcar.model.dto.response;
 
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
-
 @Setter
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserResponse {
-    private UUID id;
+    private String id;
 
     private String firstName;
 
@@ -15,6 +18,8 @@ public class UserResponse {
     private String phoneNumber;
 
     private String address;
+
+    private String department;
 
     private String email;
 
