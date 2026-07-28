@@ -32,6 +32,9 @@ public class UserInfo {
     @Column(name = "GENDER")
     private String gender;
 
+    @Column(name = "AVATAR_URL")
+    private String avatarUrl;
+
     public String getFullName() {
         return firstName + " " + lastName;
     }

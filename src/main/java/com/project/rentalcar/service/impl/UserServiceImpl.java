@@ -3,7 +3,11 @@ package com.project.rentalcar.service.impl;
 import com.project.rentalcar.common.exception.CustomException;
 import com.project.rentalcar.common.payload.ResponseCode;
 import com.project.rentalcar.mapper.UserMapper;
+import com.project.rentalcar.model.dto.request.ChangeEmailRequest;
+import com.project.rentalcar.model.dto.request.ChangePhoneRequest;
 import com.project.rentalcar.model.dto.response.RegistrationResponse;
+import com.project.rentalcar.model.dto.response.UserDashboardResponse;
+import com.project.rentalcar.model.dto.response.UserDetailResponse;
 import com.project.rentalcar.model.dto.response.UserResponse;
 import com.project.rentalcar.model.entity.EmailTemplateName;
 import com.project.rentalcar.model.entity.User;
@@ -14,9 +18,14 @@ import com.project.rentalcar.model.dto.request.ForgotPasswordRequest;
 import com.project.rentalcar.model.dto.request.ForgotPasswordVerifyRequest;
 import com.project.rentalcar.model.dto.request.RegistrationRequest;
 import com.project.rentalcar.repository.RoleRepository;
+import com.project.rentalcar.repository.BookingRepository;
+import com.project.rentalcar.repository.CarRepository;
+import com.project.rentalcar.repository.FavoriteRepository;
+import com.project.rentalcar.repository.NotificationRepository;
 import com.project.rentalcar.repository.UserInfoRepository;
 import com.project.rentalcar.repository.UserOtpRepository;
 import com.project.rentalcar.repository.UserRepository;
+import com.project.rentalcar.repository.WalletRepository;
 import com.project.rentalcar.service.EmailService;
 import com.project.rentalcar.service.RedisService;
 import com.project.rentalcar.service.UserService;
@@ -31,10 +40,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.security.SecureRandom;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -52,12 +69,20 @@ public class UserServiceImpl implements UserService {
     private final RedisService redisService;
     private final RoleRepository roleRepository;
     private final UserMapper userMapper;
+    private final CarRepository carRepository;
+    private final BookingRepository bookingRepository;
+    private final FavoriteRepository favoriteRepository;
+    private final NotificationRepository notificationRepository;
+    private final WalletRepository walletRepository;
 
     @Value("${application.character.value}")
     private String character;
 
     @Value("${application.mailing.frontend.activation-url}")
     private String activationUrl;
+
+    @Value("${application.file.uploads.photos-output-path}")
+    private String uploadsPath;
 
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -269,6 +294,163 @@ public class UserServiceImpl implements UserService {
         return userInfos.stream()
                 .map(userMapper::toUserResponse)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public UserResponse getProfile(Authentication authentication) {
+        return userMapper.toUserResponse(getCurrentUser(authentication).getUserInfo());
+    }
+
+    @Override
+    @Transactional
+    public UserResponse updateProfile(com.project.rentalcar.model.dto.request.UserProfileUpdateRequest request, Authentication authentication) {
+        var user = getCurrentUser(authentication);
+        var userInfo = user.getUserInfo();
+
+        userInfo.setFirstName(request.getFirstName());
+        userInfo.setLastName(request.getLastName());
+        userInfo.setPhoneNumber(request.getPhoneNumber());
+        userInfo.setAddress(request.getAddress());
+        userInfo.setDepartment(request.getDepartment());
+        userInfo.setGender(request.getGender());
+
+        userInfoRepository.save(userInfo);
+        userRepository.save(user);
+        return userMapper.toUserResponse(userInfo);
+    }
+
+    @Override
+    public UserDetailResponse getUserById(String id) {
+        var user = userRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ResponseCode.USER_NOT_FOUND));
+
+        return UserDetailResponse.builder()
+                .profile(userMapper.toUserResponse(user.getUserInfo()))
+                .enabled(user.isEnabled())
+                .locked(user.isLocked())
+                .loginCount(user.getLoginCount())
+                .status(user.getStatus())
+                .build();
+    }
+
+    @Override
+    @Transactional
+    public UserResponse updateAvatar(MultipartFile avatar, Authentication authentication) {
+        if (avatar == null || avatar.isEmpty()) {
+            throw new CustomException(ResponseCode.VALIDATION_FAILED);
+        }
+
+        var user = getCurrentUser(authentication);
+        var userInfo = user.getUserInfo();
+
+        try {
+            Path rootPath = Paths.get(uploadsPath, "avatars");
+            Files.createDirectories(rootPath);
+
+            String fileName = UUID.randomUUID() + getFileExtension(avatar.getOriginalFilename());
+            Path destination = rootPath.resolve(fileName).normalize();
+            Files.copy(avatar.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
+
+            deleteAvatarFile(userInfo.getAvatarUrl());
+            userInfo.setAvatarUrl(destination.toString().replace('\\', '/'));
+            userInfoRepository.save(userInfo);
+            return userMapper.toUserResponse(userInfo);
+        } catch (IOException e) {
+            throw new CustomException(ResponseCode.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void deleteAvatar(Authentication authentication) {
+        var user = getCurrentUser(authentication);
+        var userInfo = user.getUserInfo();
+        deleteAvatarFile(userInfo.getAvatarUrl());
+        userInfo.setAvatarUrl(null);
+        userInfoRepository.save(userInfo);
+    }
+
+    @Override
+    @Transactional
+    public void changeEmail(ChangeEmailRequest request, Authentication authentication) {
+        var user = getCurrentUser(authentication);
+
+        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+            throw new CustomException(ResponseCode.INVALID_CURRENT_PASSWORD);
+        }
+
+        userRepository.findByEmail(request.getNewEmail())
+                .ifPresent(existing -> {
+                    if (!existing.getId().equals(user.getId())) {
+                        throw new CustomException(ResponseCode.EMAIL_ALREADY_EXISTS);
+                    }
+                });
+
+        user.getUserInfo().setEmail(request.getNewEmail());
+        userInfoRepository.save(user.getUserInfo());
+        userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void changePhone(ChangePhoneRequest request, Authentication authentication) {
+        var user = getCurrentUser(authentication);
+        user.getUserInfo().setPhoneNumber(request.getPhoneNumber());
+        userInfoRepository.save(user.getUserInfo());
+    }
+
+    @Override
+    @Transactional
+    public void deleteAccount(Authentication authentication) {
+        var user = getCurrentUser(authentication);
+        user.setDeleted(true);
+        user.setEnabled(false);
+        user.setLocked(true);
+        userRepository.save(user);
+    }
+
+    @Override
+    public UserDashboardResponse getDashboard(Authentication authentication) {
+        var user = getCurrentUser(authentication);
+        var wallet = walletRepository.findByUser_Id(user.getId()).orElse(null);
+
+        return UserDashboardResponse.builder()
+                .profile(userMapper.toUserResponse(user.getUserInfo()))
+                .totalCarsOwned(carRepository.countByOwner_Id(user.getId()))
+                .totalBookingsAsCustomer(bookingRepository.countByCustomer_Id(user.getId()))
+                .totalBookingsAsOwner(bookingRepository.countByOwner_Id(user.getId()))
+                .totalFavorites(favoriteRepository.countByCustomer_Id(user.getId()))
+                .unreadNotifications(notificationRepository.countByUser_IdAndStatus(user.getId(), com.project.rentalcar.common.enums.NotificationStatus.UNREAD))
+                .walletBalance(wallet != null ? wallet.getBalance() : BigDecimal.ZERO)
+                .build();
+    }
+
+    private User getCurrentUser(Authentication authentication) {
+        if (authentication == null || !(authentication.getPrincipal() instanceof User user)) {
+            throw new CustomException(ResponseCode.ACCESS_DENIED);
+        }
+
+        return userRepository.findById(user.getId())
+                .orElseThrow(() -> new CustomException(ResponseCode.USER_NOT_FOUND));
+    }
+
+    private void deleteAvatarFile(String avatarUrl) {
+        if (avatarUrl == null || avatarUrl.isBlank()) {
+            return;
+        }
+
+        try {
+            Files.deleteIfExists(Paths.get(avatarUrl));
+        } catch (IOException ignored) {
+            // Best effort cleanup for local uploads.
+        }
+    }
+
+    private String getFileExtension(String fileName) {
+        if (fileName == null || !fileName.contains(".")) {
+            return ".png";
+        }
+        return fileName.substring(fileName.lastIndexOf('.')).toLowerCase(Locale.ROOT);
     }
 
     private String generateRandomPassword() {

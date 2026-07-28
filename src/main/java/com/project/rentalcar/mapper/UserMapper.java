@@ -27,5 +27,6 @@ public interface UserMapper {
 
     RegistrationResponse toRegistrationResponse(UserInfo userInfo);
 
+    @Mapping(target = "avatarUrl", source = "avatarUrl")
     UserResponse toUserResponse(UserInfo userInfo);
 }

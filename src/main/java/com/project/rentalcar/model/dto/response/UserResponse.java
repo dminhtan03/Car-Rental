@@ -24,4 +24,6 @@ public class UserResponse {
     private String email;
 
     private String gender;
+
+    private String avatarUrl;
 }
