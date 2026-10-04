@@ -1,22 +1,17 @@
 package com.project.rentalcar.controller;
 
 import com.project.rentalcar.common.payload.Response;
-import com.project.rentalcar.model.dto.request.ChangePasswordRequest;
-import com.project.rentalcar.model.dto.request.ForgotPasswordRequest;
-import com.project.rentalcar.model.dto.request.ForgotPasswordVerifyRequest;
-import com.project.rentalcar.model.dto.request.RegistrationRequest;
+import com.project.rentalcar.model.dto.request.*;
 import com.project.rentalcar.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -67,4 +62,29 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUser());
     }
 
+
+    @PutMapping("/profile")
+    public ResponseEntity<?> updateProfile(
+            @Valid @RequestBody UserProfileUpdateRequest request,
+            Authentication authentication) {
+        return ResponseEntity.ok(Response.ofSucceeded(userService.updateProfile(request, authentication)));
+    }
+
+    @PutMapping(value = "/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> updateAvatar(
+            @RequestParam("file") MultipartFile file,
+            Authentication authentication) {
+        return ResponseEntity.ok(Response.ofSucceeded(userService.updateAvatar(file, authentication)));
+    }
+
+    @DeleteMapping("/avatar")
+    public ResponseEntity<?> deleteAvatar(Authentication authentication) {
+        userService.deleteAvatar(authentication);
+        return ResponseEntity.ok(Response.ofSucceeded("Avatar deleted successfully"));
+    }
+
+    @GetMapping("/dashboard")
+    public ResponseEntity<?> getDashboard(HttpServletRequest request) {
+        return ResponseEntity.ok(Response.ofSucceeded(userService.getDashboard(request)));
+    }
 }

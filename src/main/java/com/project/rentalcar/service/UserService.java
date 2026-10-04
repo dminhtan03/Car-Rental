@@ -11,6 +11,7 @@ import com.project.rentalcar.model.dto.response.RegistrationResponse;
 import com.project.rentalcar.model.dto.response.UserDashboardResponse;
 import com.project.rentalcar.model.dto.response.UserDetailResponse;
 import com.project.rentalcar.model.dto.response.UserResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,8 +30,6 @@ public interface UserService {
 
     List<UserResponse> getAllUser();
 
-    UserResponse getProfile(Authentication authentication);
-
     UserResponse updateProfile(UserProfileUpdateRequest request, Authentication authentication);
 
     UserDetailResponse getUserById(String id);
@@ -45,5 +44,5 @@ public interface UserService {
 
     void deleteAccount(Authentication authentication);
 
-    UserDashboardResponse getDashboard(Authentication authentication);
+    UserDashboardResponse getDashboard(HttpServletRequest request);
 }

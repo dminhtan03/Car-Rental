@@ -2,9 +2,9 @@ package com.project.rentalcar.service.impl;
 
 import com.project.rentalcar.common.exception.CustomException;
 import com.project.rentalcar.common.payload.ResponseCode;
+import com.project.rentalcar.common.utils.JwtUtils;
 import com.project.rentalcar.mapper.UserMapper;
-import com.project.rentalcar.model.dto.request.ChangeEmailRequest;
-import com.project.rentalcar.model.dto.request.ChangePhoneRequest;
+import com.project.rentalcar.model.dto.request.*;
 import com.project.rentalcar.model.dto.response.RegistrationResponse;
 import com.project.rentalcar.model.dto.response.UserDashboardResponse;
 import com.project.rentalcar.model.dto.response.UserDetailResponse;
@@ -13,10 +13,6 @@ import com.project.rentalcar.model.entity.EmailTemplateName;
 import com.project.rentalcar.model.entity.User;
 import com.project.rentalcar.model.entity.UserInfo;
 import com.project.rentalcar.model.entity.UserOtp;
-import com.project.rentalcar.model.dto.request.ChangePasswordRequest;
-import com.project.rentalcar.model.dto.request.ForgotPasswordRequest;
-import com.project.rentalcar.model.dto.request.ForgotPasswordVerifyRequest;
-import com.project.rentalcar.model.dto.request.RegistrationRequest;
 import com.project.rentalcar.repository.RoleRepository;
 import com.project.rentalcar.repository.BookingRepository;
 import com.project.rentalcar.repository.CarRepository;
@@ -30,6 +26,7 @@ import com.project.rentalcar.service.EmailService;
 import com.project.rentalcar.service.RedisService;
 import com.project.rentalcar.service.UserService;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -74,6 +71,7 @@ public class UserServiceImpl implements UserService {
     private final FavoriteRepository favoriteRepository;
     private final NotificationRepository notificationRepository;
     private final WalletRepository walletRepository;
+    private final JwtUtils jwtUtils;
 
     @Value("${application.character.value}")
     private String character;
@@ -297,13 +295,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse getProfile(Authentication authentication) {
-        return userMapper.toUserResponse(getCurrentUser(authentication).getUserInfo());
-    }
-
-    @Override
     @Transactional
-    public UserResponse updateProfile(com.project.rentalcar.model.dto.request.UserProfileUpdateRequest request, Authentication authentication) {
+    public UserResponse updateProfile(UserProfileUpdateRequest request, Authentication authentication) {
         var user = getCurrentUser(authentication);
         var userInfo = user.getUserInfo();
 
@@ -410,8 +403,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDashboardResponse getDashboard(Authentication authentication) {
-        var user = getCurrentUser(authentication);
+    public UserDashboardResponse getDashboard(HttpServletRequest request) {
+        String authHeader = request.getHeader("Authorization");
+
+        String accessToken = authHeader.substring(7);
+
+        String userEmail = jwtUtils.extractUsername(accessToken);
+        var user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new CustomException(ResponseCode.USER_NOT_FOUND));
         var wallet = walletRepository.findByUser_Id(user.getId()).orElse(null);
 
         return UserDashboardResponse.builder()
